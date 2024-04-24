@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/machination_short.mp3-ca1ed7744b55c5386e0f803c177eed23.mp3str"
+
+[deps]
+
+source_file="res://SFX/boss/machination_short.mp3"
+dest_files=[ "res://.import/machination_short.mp3-ca1ed7744b55c5386e0f803c177eed23.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

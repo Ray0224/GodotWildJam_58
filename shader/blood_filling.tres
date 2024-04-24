@@ -1,0 +1,46 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform float lacunarity: hint_range(0.1, 5.0, 0.1) = 1.5;
+uniform float gain: hint_range(0.1, 2.0, 0.1) = 0.4;
+uniform int octaves: hint_range(1, 10, 1) = 4;
+uniform float init_frequency = 12.0;
+uniform float init_amplitude = 0.02;
+
+uniform float wave_hspeed: hint_range(0.0, 10.0, 0.1) = 5.0; 
+uniform float blood_level: hint_range(0.0, 1.0, 0.05) = 1.0;
+uniform vec4 front_blood_color: hint_color = vec4(0.6, 0.0, 0.0, 1.0);
+uniform vec4 back_blood_color: hint_color = vec4(1.0, 0.0, 0.0, 1.0);
+
+
+float fbm(float x, float time){
+	float value = 0.0;
+	float amplitude = init_amplitude;
+	float frequency = init_frequency;
+	
+	for(int i = 0 ; i < octaves; i++){
+		value += amplitude * sin(x * frequency + time);
+		amplitude *= gain;
+		frequency *= lacunarity;
+	}
+	
+	return value;
+}
+
+
+void fragment(){
+	float front_blood_height = blood_level + fbm(UV.x, TIME * wave_hspeed);
+	float back_blood_height = blood_level + fbm(UV.x, TIME * wave_hspeed * 1.5 + 0.5);
+	
+	float height = 1.0 - UV.y;
+	vec4 texture_color = texture(TEXTURE, UV);
+	
+	vec4 blood_color = mix(front_blood_color, back_blood_color, 
+		step(front_blood_height, height));
+		
+	COLOR = mix(blood_color * texture_color.a, texture_color, 
+		step(max(back_blood_height, front_blood_height), height));
+	
+}"

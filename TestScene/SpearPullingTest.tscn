@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scene/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scene/PullArea.tscn" type="PackedScene" id=2]
+
+[node name="SpearPullingTest" type="Node2D"]
+
+[node name="player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 617, 678 )
+
+[node name="PullArea" parent="." instance=ExtResource( 2 )]
+position = Vector2( 674, 338 )
+rotation = 0.241502
+
+[connection signal="pull_finished" from="PullArea" to="player" method="play_spear_out"]
+[connection signal="pulled" from="PullArea" to="player" method="play_spear_pull"]

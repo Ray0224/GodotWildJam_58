@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://shader/blood_filling.tres" type="Shader" id=1]
+[ext_resource path="res://sprite/shrine_test.png" type="Texture" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/lacunarity = 1.5
+shader_param/gain = 0.4
+shader_param/octaves = 4
+shader_param/init_frequency = 12.0
+shader_param/init_amplitude = 0.02
+shader_param/wave_hspeed = 2.0
+shader_param/blood_level = 0.45
+shader_param/front_blood_color = Color( 0.6, 0, 0, 1 )
+shader_param/back_blood_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/blood_level")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.45 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fill_blood"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/blood_level")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 6, 8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.3, 0.5, 0.523077, 1.0 ]
+}
+
+[node name="ShrineTest" type="Sprite"]
+material = SubResource( 1 )
+position = Vector2( 605, 371 )
+texture = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "fill_blood"
+anims/RESET = SubResource( 2 )
+anims/fill_blood = SubResource( 3 )

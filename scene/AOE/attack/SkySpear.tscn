@@ -1,0 +1,103 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scene/AOE/indicator/OvalIndicator.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scene/AOE/attack/AOEBaseScene.tscn" type="PackedScene" id=2]
+[ext_resource path="res://script/AOE/SkySpear.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+
+[sub_resource type="Animation" id=6]
+resource_name = "disappear"
+length = 1.5
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "start_disappear"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "stop_hit_box"
+} ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "spear_fall"
+length = 0.1
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "start_hit_box"
+} ]
+}
+
+[sub_resource type="Curve2D" id=14]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -70, 7, 0, 0, 0, 0, -56, -13, 0, 0, 0, 0, -55, 23, 0, 0, 0, 0, -39, -13, 0, 0, 0, 0, -29, 20, 0, 0, 0, 0, -15, -11, 0, 0, 0, 0, -3, 20, 0, 0, 0, 0, 11, -9, 0, 0, 0, 0, 25, 18, 0, 0, 0, 0, 38, -9, 0, 0, 0, 0, 50, 17, 0, 0, 0, 0, 61, -10, 0, 0, 0, 0, 69, 3 )
+}
+
+[node name="SkySpear" instance=ExtResource( 2 )]
+position = Vector2( 830, 540 )
+script = ExtResource( 3 )
+base_scale = Vector2( 0.5, 0.5 )
+num_spears = 6
+spear_spawn_radius = 500.0
+
+[node name="CollisionPolygon2D" parent="." index="1"]
+polygon = PoolVector2Array( -54, -21, 0, -22, 50, -22, 65, -15, 74, 1, 68, 19, 53, 28, -53, 28, -67, 21, -76, 6, -70, -12 )
+
+[node name="OvalIndicator" parent="." index="2" instance=ExtResource( 1 )]
+
+[node name="Spears" type="Node2D" parent="." index="3"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+anims/RESET = SubResource( 2 )
+anims/disappear = SubResource( 6 )
+anims/spear_fall = SubResource( 3 )
+
+[node name="DropPath" type="Path2D" parent="." index="5"]
+curve = SubResource( 14 )
+
+[node name="DropPathFollow" type="PathFollow2D" parent="DropPath" index="0"]
+position = Vector2( -70, 7 )
+rotation = -0.960071

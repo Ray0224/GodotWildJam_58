@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scene/AOE/indicator/BaseIndicator.tscn" type="PackedScene" id=1]
+[ext_resource path="res://script/AOE/CircleIndicator.gd" type="Script" id=2]
+
+[node name="OvalIndicator" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+left_length = 80.0
+up_length = 30.0
+down_length = 35.0
+right_length = 80.0
+unfilled_color = Color( 0.698039, 0.133333, 0.133333, 0.313726 )
+filled_color = Color( 0.698039, 0.133333, 0.133333, 0.784314 )
+num_points = 20

@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://script/generator.gd" type="Script" id=1]
+
+[node name="enemy_generator" type="Node2D"]
+script = ExtResource( 1 )
+spawn_range_x = Vector2( 0, 1080 )
+spawn_range_y = Vector2( 360, 720 )
+
+[node name="skeleton_timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="bat_timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="timeout" from="skeleton_timer" to="." method="skeleton_spawn"]
+[connection signal="timeout" from="bat_timer" to="." method="bat_spawn"]

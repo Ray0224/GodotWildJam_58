@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scene/background_object/BaseBGObject.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprite/cloud/cloud02.png" type="Texture" id=2]
+
+[node name="BGCloud2" instance=ExtResource( 1 )]
+texture = ExtResource( 2 )
+
+[node name="VisibilityNotifier2D" parent="." index="0"]
+rect = Rect2( -650, -50, 1300, 100 )

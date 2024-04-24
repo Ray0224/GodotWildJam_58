@@ -1,0 +1,143 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://sprite/enemyGeneration.png" type="Texture" id=1]
+[ext_resource path="res://script/skeleton_generator.gd" type="Script" id=2]
+[ext_resource path="res://script/Generation_size.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("EnemyGeneration:polygon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 84.0426, 285.106, -1.06383, 260.106, -1.06383, 197.34, 67.5532, 157.979, 16.4894, 125, 7.44681, 54.2553, 103.723, -2.12766, 113.298, 7.97872, 70.7447, 62.766, 85.6383, 95.2128, 168.617, 150.532, 160.638, 205.851, 171.809, 268.617 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("EnemyGeneration:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("EnemyGeneration:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.886275, 0.0588235, 0.0588235, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("EnemyGeneration:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -8, -1100 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "generate"
+length = 1.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("EnemyGeneration:polygon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.6, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 87, 286, 37, 262, 51, 220, 140, 272, 34, 246, 72, 201, 97, 211, 118, 221, 146, 235, 146, 246, 153, 256, 143, 232, 171.809, 268.617 ), PoolVector2Array( 87, 286, 37, 262, 51, 220, 140, 272, 34, 246, 72, 201, 97, 211, 118, 221, 146, 235, 146, 246, 153, 256, 143, 232, 171.809, 268.617 ), PoolVector2Array( 87, 286, 37, 262, 51, 220, 140, 272, 34, 246, 72, 201, 97, 211, 118, 221, 146, 235, 146, 246, 153, 256, 143, 232, 171.809, 268.617 ), PoolVector2Array( 86.0142, 285.702, 24.3121, 261.369, 33.6454, 212.447, 115.851, 233.993, 12, 205, -22, 106, 94, 75, 166, 144, 61, 124, 118, 198, 158.206, 220.844, 148.879, 223.284, 171.809, 268.617 ), PoolVector2Array( 84.5355, 285.255, 5.28014, 260.422, 29, 233, 13, 169, -62, 76, 84, 15, 156, 105, 156, 147, 87, 89, 102, 126, 52, 148, 97, 209, 171.809, 268.617 ), PoolVector2Array( 84.0426, 285.106, -1.06383, 260.106, -1.06383, 197.34, 67.5532, 157.979, 16.4894, 125, 7.44681, 54.2553, 103.723, -2.12766, 113.298, 7.97872, 70.7447, 62.766, 85.6383, 95.2128, 168.617, 150.532, 160.638, 205.851, 171.809, 268.617 ), PoolVector2Array( 84.0426, 285.106, -1.06383, 260.106, -1.06383, 197.34, 94, 150, 18, 180, -23, 137, 28, 83, 99, 24, 46, 114, 132, 53, 194, 70, 203, 178, 171.809, 268.617 ), PoolVector2Array( 84.0426, 285.106, -9.53192, 258.553, 8.46809, 188.67, 94.5, 169, 63, 179.5, 22.5, 136.5, 51.5, 92.5, 69, 63, 90.5, 100, 151, 70.5, 194.5, 132.5, 152, 214.5, 171.809, 268.617 ), PoolVector2Array( 84.0426, 285.106, -18, 257, 18, 180, 78, 198, 98, 173, 159, 105, 154, 93, 171, 76, 207, 112, 217, 190, 132, 236, 101, 251, 171.809, 268.617 ), PoolVector2Array( 85.0284, 285.404, 3.15603, 259.184, 25.5, 207.5, 67, 211, 34, 173.5, 25, 119.5, 90, 90, 110, 96, 100, 116.5, 118, 139, 176.603, 207.922, 107, 233, 171.809, 268.617 ), PoolVector2Array( 86.0142, 285.702, 24.3121, 261.369, 46, 236, 67, 218, -36, 173, -22, 96, 94, 75, 159, 120, 65, 147, 59, 171, 130, 208, 156, 228, 171.809, 268.617 ), PoolVector2Array( 87, 286, 37, 262, 51, 220, 140, 272, 34, 246, 72, 201, 97, 211, 118, 221, 146, 235, 146, 246, 153, 256, 143, 232, 171.809, 268.617 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("EnemyGeneration:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 1.5, 1.7 ),
+"transitions": PoolRealArray( 0.25, 0.420448, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.286, 1 ), Vector2( 0.286, 1 ), Vector2( 0.922, 0.305 ), Vector2( 0.799684, 0.438663 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.922, 0.305 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("EnemyGeneration:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 1.5, 1.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.772549, 0.0117647, 0.0117647, 1 ), Color( 0.772549, 0.0117647, 0.0117647, 1 ), Color( 0.772549, 0.0117647, 0.0117647, 1 ), Color( 0.227451, 0.180392, 0.180392, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("EnemyGeneration:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -8, -1100 ), Vector2( 0, 0 ) ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1, 1.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "skeleton_spawn"
+}, {
+"args": [  ],
+"method": "destroyed"
+} ]
+}
+
+[node name="skeleton_generator" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="EnemyGeneration" type="Polygon2D" parent="."]
+modulate = Color( 0.886275, 0.0588235, 0.0588235, 1 )
+position = Vector2( -8, -1100 )
+offset = Vector2( -87, -270 )
+texture = ExtResource( 1 )
+polygon = PoolVector2Array( 84.0426, 285.106, -1.06383, 260.106, -1.06383, 197.34, 67.5532, 157.979, 16.4894, 125, 7.44681, 54.2553, 103.723, -2.12766, 113.298, 7.97872, 70.7447, 62.766, 85.6383, 95.2128, 168.617, 150.532, 160.638, 205.851, 171.809, 268.617 )
+uv = PoolVector2Array( 84.0426, 285.106, -1.06383, 260.106, -1.06383, 197.34, 67.5532, 157.979, 16.4894, 125, 7.44681, 54.2553, 103.723, -2.12766, 113.298, 7.97872, 70.7447, 62.766, 85.6383, 95.2128, 168.617, 150.532, 160.638, 205.851, 171.809, 268.617 )
+polygons = [ PoolIntArray( 7, 8, 5, 6 ), PoolIntArray( 5, 4, 9, 8 ), PoolIntArray( 4, 3, 10, 9 ), PoolIntArray( 3, 11, 10 ), PoolIntArray( 11, 1, 0 ), PoolIntArray( 3, 2, 11 ), PoolIntArray( 11, 2, 1 ), PoolIntArray( 11, 0, 12 ) ]
+script = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "generate"
+anims/RESET = SubResource( 1 )
+anims/generate = SubResource( 2 )

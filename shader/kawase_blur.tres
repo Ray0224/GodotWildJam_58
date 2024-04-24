@@ -1,0 +1,23 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+
+uniform float radius: hint_range(0.0, 10.0, 0.1) = 0.0;
+
+
+vec4 kawaseBlur(sampler2D text, vec2 coord, vec2 radius_vec){
+	vec4 color = vec4(0.0);
+	color += texture(text, coord + vec2(1.0, 1.0) * radius_vec);
+	color += texture(text, coord + vec2(-1.0, 1.0) * radius_vec);
+	color += texture(text, coord + vec2(1.0, -1.0) * radius_vec);
+	color += texture(text, coord + vec2(-1.0, -1.0) * radius_vec);
+	return color / 4.0;
+}
+
+
+void fragment(){
+	vec2 text_radius = radius * TEXTURE_PIXEL_SIZE;
+	COLOR = kawaseBlur(TEXTURE, UV, text_radius);
+}"

@@ -1,0 +1,36 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform sampler2D noise1;
+uniform sampler2D noise2;
+uniform float noise_speed: hint_range(0.0, 2.0, 0.1) = 1.0;
+uniform vec4 explode_color: hint_color = vec4(1.0, 0.0, 0.0, 0.3);
+uniform vec4 edge_color: hint_color = vec4(0.2, 0.2, 0.0, 1.0);
+uniform float visible_threshold: hint_range(0.0, 1.0, 0.1) = 0.0;
+
+void fragment(){
+	vec2 offset1 = vec2(UV.x - TIME * noise_speed, UV.y + sin((UV.x - 0.5) * 3.14));
+	vec2 offset2 = vec2(UV.x + TIME / 4.0, UV.y);
+	
+	float alpha = texture(TEXTURE, UV).a;
+	COLOR = explode_color;
+	COLOR = mix(COLOR, edge_color, step(0.5, texture(noise1, offset1).r));
+	
+	float offset_y = UV.y + texture(noise1, offset1).r / 3.0;
+	offset_y -= abs(UV.x - 0.5) / 10.0;
+	if(texture(TEXTURE, vec2(UV.x, offset_y)).a == 0.0){
+		COLOR = texture(noise1, offset1);
+		COLOR.rgb /= 5.0;
+	}
+	COLOR.a *= alpha;
+	
+	float noise_value = texture(noise1, offset1).r;
+	
+	if(COLOR.a != 0.0){
+		if(noise_value < visible_threshold){
+			COLOR.a = 0.0;
+		}
+	}
+}"

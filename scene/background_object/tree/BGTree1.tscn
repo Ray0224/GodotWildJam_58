@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://sprite/tree/tree01.png" type="Texture" id=1]
+[ext_resource path="res://scene/background_object/BaseBGObject.tscn" type="PackedScene" id=2]
+[ext_resource path="res://shader/kawase_blur.tres" type="Shader" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 3 )
+shader_param/radius = 0.0
+
+[node name="BGTree1" instance=ExtResource( 2 )]
+material = SubResource( 1 )
+texture = ExtResource( 1 )
+offset = Vector2( 111, -419 )
+
+[node name="VisibilityNotifier2D" parent="." index="0"]
+rect = Rect2( -200, -900, 650, 1000 )

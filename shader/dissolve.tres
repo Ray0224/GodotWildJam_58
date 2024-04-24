@@ -1,0 +1,31 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform sampler2D dissolve_noise;
+uniform sampler2D edge_light_noise;
+
+uniform float visible_threshold: hint_range(0.0, 1.0, 0.1) = 0.0;
+uniform float edge_width: hint_range(0.0, 1.0, 0.1) = 0.1;
+uniform vec4 edge_color1: hint_color;
+uniform vec4 edge_color2: hint_color;
+
+
+void fragment(){
+	vec4 color = texture(TEXTURE, UV);
+	float noise_value = texture(dissolve_noise, UV).r;
+	
+	if(color.a != 0.0){
+		if(noise_value < visible_threshold - edge_width){
+			color.a = 0.0;
+		}
+		else if(noise_value < visible_threshold){
+			float t = texture(edge_light_noise, UV).r;
+			t = smoothstep(0.45, 0.55, t);
+			color = mix(edge_color1, edge_color2, t);
+		}
+	}
+	
+	COLOR = color;
+}"

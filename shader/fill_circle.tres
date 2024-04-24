@@ -1,0 +1,29 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform float fill_amount: hint_range(0.0, 1.0, 0.1) = 1.0;
+uniform vec4 unfilled_color: hint_color = vec4(0.6, 0.6, 0.6, 1.0);
+
+const float PI = 3.1415926;
+
+void fragment(){
+	vec2 uv_vec = UV - vec2(0.5, 0.5);
+	uv_vec = normalize(uv_vec);
+	uv_vec = vec2(-uv_vec.y, uv_vec.x);
+	
+	float fill_rad = (1.0 - fill_amount) * 2.0 * PI;
+	fill_rad -= PI / 2.0;
+ 	
+	float uv_rad = acos(uv_vec.x);
+	if(uv_vec.y < 0.0){
+		uv_rad = 2.0 * PI - uv_rad;
+	}
+	uv_rad -= PI / 2.0;
+	
+	vec4 color = texture(TEXTURE, UV);
+	COLOR = mix(vec4(unfilled_color.rgb, color.a), color, step(fill_rad, uv_rad)); 
+}
+
+"

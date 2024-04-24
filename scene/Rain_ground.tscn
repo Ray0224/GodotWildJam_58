@@ -1,0 +1,88 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://sprite/rain_ground.png" type="Texture" id=1]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("RainGround:polygon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 84, 82, 75, 71, 78, 66, 83, 72, 86, 67, 78, 61, 84, 57, 88, 62, 93, 61, 92, 49, 102, 48, 102, 64, 106, 58, 111, 52, 125, 50, 114, 68, 118, 70, 122, 66, 128, 71, 116, 82, 95.5056, 81.2195 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RainGround:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.835294, 0.0666667, 0.0666667, 0.815686 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "raiin_ground"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("RainGround:polygon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.5 ),
+"transitions": PoolRealArray( 0.392292, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 84, 82, 75, 71, 78, 66, 83, 72, 86, 67, 78, 61, 84, 57, 88, 62, 93, 61, 92, 49, 102, 48, 102, 64, 106, 58, 111, 52, 125, 50, 114, 68, 118, 70, 122, 66, 128, 71, 116, 82, 95.5056, 81.2195 ), PoolVector2Array( 49.9393, 81.288, 0.333332, 81.1667, -1.16667, 65.3333, 48.5597, 65.6379, 54.7325, 60.0823, 17.3755, 43.6209, 23.0863, 32.6853, 81.4095, 52.2479, 91, 38, 85, -6, 102, -25, 105, 35, 108.384, 52.1264, 120.557, 21.9512, 166.343, 37.4241, 132.442, 59.5383, 134.508, 64.1555, 190.887, 57.7157, 192.345, 69.9879, 130.741, 81.1665, 95.5056, 81.2195 ), PoolVector2Array( 49.9393, 81.288, -36, 81, -22, 75, 44, 79, 52, 78, -14, 77, -4, 74, 56, 70, 74, 71, 77, 66, 99, 57, 105, 64, 112, 69, 123, 68, 197, 73, 129, 75, 134, 76, 205, 72, 217, 77, 130.741, 81.1665, 95.5056, 81.2195 ), PoolVector2Array( 70, 70, 53, 51, 55, 45, 73, 62, 78, 57, 58, 36, 72, 21, 83, 52, 94, 59, 90, 17, 103.402, -1.33657, 104, 53, 108, 56, 118, 19, 136, 21, 118, 61, 121, 63, 140, 33, 141, 42, 125, 75, 95.5056, 81.2195 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RainGround:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.835294, 0.0666667, 0.0666667, 0.815686 ), Color( 0.835294, 0.0666667, 0.0666667, 0.815686 ), Color( 0.835294, 0.0666667, 0.0666667, 0 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[node name="RainGround" type="Node2D"]
+
+[node name="RainGround" type="Polygon2D" parent="."]
+modulate = Color( 0.835294, 0.0666667, 0.0666667, 0.815686 )
+position = Vector2( 0, 2 )
+offset = Vector2( -98, -78 )
+texture = ExtResource( 1 )
+polygon = PoolVector2Array( 84, 82, 75, 71, 78, 66, 83, 72, 86, 67, 78, 61, 84, 57, 88, 62, 93, 61, 92, 49, 102, 48, 102, 64, 106, 58, 111, 52, 125, 50, 114, 68, 118, 70, 122, 66, 128, 71, 116, 82, 95.5056, 81.2195 )
+uv = PoolVector2Array( 49.9393, 81.288, 0.333332, 81.1667, -1.16667, 65.3333, 48.5597, 65.6379, 54.7325, 60.0823, 17.3755, 43.6209, 23.0863, 32.6853, 81.4095, 52.2479, 90.401, 52.1264, 69.6233, 10.5711, 103.402, -1.33657, 106.075, 50.5468, 108.384, 52.1264, 120.557, 21.9512, 166.343, 37.4241, 132.442, 59.5383, 134.508, 64.1555, 190.887, 57.7157, 192.345, 69.9879, 130.741, 81.1665, 95.5056, 81.2195 )
+polygons = [ PoolIntArray( 2, 1, 0, 3 ), PoolIntArray( 5, 4, 7, 6 ), PoolIntArray( 8, 9, 10, 11 ), PoolIntArray( 13, 12, 15, 14 ), PoolIntArray( 16, 17, 18, 19 ), PoolIntArray( 0, 20, 3 ), PoolIntArray( 20, 3, 4 ), PoolIntArray( 20, 4, 7 ), PoolIntArray( 20, 7, 8 ), PoolIntArray( 20, 8, 11 ), PoolIntArray( 20, 11, 12 ), PoolIntArray( 20, 12, 15 ), PoolIntArray( 20, 15, 16 ), PoolIntArray( 20, 16, 19 ) ]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "raiin_ground"
+anims/RESET = SubResource( 1 )
+anims/raiin_ground = SubResource( 2 )

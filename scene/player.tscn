@@ -1,0 +1,5720 @@
+[gd_scene load_steps=54 format=2]
+
+[ext_resource path="res://script/player_move.gd" type="Script" id=1]
+[ext_resource path="res://sprite/angle/angel_head.png" type="Texture" id=2]
+[ext_resource path="res://sprite/angle/angel_body.png" type="Texture" id=3]
+[ext_resource path="res://script/player.gd" type="Script" id=4]
+[ext_resource path="res://script/player_size.gd" type="Script" id=5]
+[ext_resource path="res://sprite/angle/angel_sword.png" type="Texture" id=6]
+[ext_resource path="res://sprite/angle/angel_wing.png" type="Texture" id=7]
+[ext_resource path="res://sprite/angle/angel_eye.png" type="Texture" id=8]
+[ext_resource path="res://sprite/angle/angel_aura.png" type="Texture" id=9]
+[ext_resource path="res://script/player_attack_area.gd" type="Script" id=10]
+[ext_resource path="res://script/player_body.gd" type="Script" id=11]
+[ext_resource path="res://sprite/circle.png" type="Texture" id=12]
+[ext_resource path="res://SFX/player/short_choir.mp3" type="AudioStream" id=13]
+[ext_resource path="res://sprite/spear.png" type="Texture" id=14]
+[ext_resource path="res://SFX/player/dash.wav" type="AudioStream" id=15]
+[ext_resource path="res://SFX/player/swing1.wav" type="AudioStream" id=16]
+[ext_resource path="res://SFX/player/dui.wav" type="AudioStream" id=17]
+[ext_resource path="res://SFX/player/hurt1.wav" type="AudioStream" id=18]
+[ext_resource path="res://sprite/attack/VFX_attack01.png" type="Texture" id=19]
+[ext_resource path="res://shader/body_shader.tres" type="Shader" id=20]
+[ext_resource path="res://shader/noise/dissolve_noise.tres" type="Texture" id=21]
+[ext_resource path="res://shader/fill_circle.tres" type="Shader" id=22]
+[ext_resource path="res://shader/fill_circle2.tres" type="Shader" id=23]
+[ext_resource path="res://SFX/player/fall.mp3" type="AudioStream" id=24]
+[ext_resource path="res://shader/single_color.tres" type="Shader" id=25]
+[ext_resource path="res://scene/dash _gradient.tres" type="Gradient" id=26]
+
+[sub_resource type="ShaderMaterial" id=49]
+resource_local_to_scene = true
+shader = ExtResource( 25 )
+shader_param/color = Color( 1, 0.2, 0.2, 1 )
+shader_param/enable = false
+
+[sub_resource type="CircleShape2D" id=10]
+radius = 65.0
+
+[sub_resource type="ShaderMaterial" id=21]
+resource_local_to_scene = true
+shader = ExtResource( 20 )
+shader_param/threshold = 1.0
+shader_param/noise = ExtResource( 21 )
+
+[sub_resource type="ShaderMaterial" id=22]
+resource_local_to_scene = true
+shader = ExtResource( 20 )
+shader_param/threshold = 1.0
+shader_param/noise = ExtResource( 21 )
+
+[sub_resource type="ShaderMaterial" id=23]
+resource_local_to_scene = true
+shader = ExtResource( 20 )
+shader_param/threshold = 1.0
+shader_param/noise = ExtResource( 21 )
+
+[sub_resource type="ShaderMaterial" id=24]
+resource_local_to_scene = true
+shader = ExtResource( 20 )
+shader_param/threshold = 1.0
+shader_param/noise = ExtResource( 21 )
+
+[sub_resource type="ShaderMaterial" id=25]
+resource_local_to_scene = true
+shader = ExtResource( 22 )
+shader_param/fill_amount = 1.0
+shader_param/unfilled_color = Color( 0.6, 0.6, 0.6, 1 )
+
+[sub_resource type="ShaderMaterial" id=26]
+resource_local_to_scene = true
+shader = ExtResource( 23 )
+shader_param/fill_amount = 1.0
+shader_param/unfilled_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="ShaderMaterial" id=19]
+resource_local_to_scene = true
+shader = ExtResource( 20 )
+shader_param/threshold = 1.0
+shader_param/noise = ExtResource( 21 )
+
+[sub_resource type="ShaderMaterial" id=20]
+resource_local_to_scene = true
+shader = ExtResource( 20 )
+shader_param/threshold = 1.0
+shader_param/noise = ExtResource( 21 )
+
+[sub_resource type="ShaderMaterial" id=17]
+resource_local_to_scene = true
+shader = ExtResource( 20 )
+shader_param/threshold = 1.0
+shader_param/noise = ExtResource( 21 )
+
+[sub_resource type="ShaderMaterial" id=18]
+resource_local_to_scene = true
+shader = ExtResource( 20 )
+shader_param/threshold = 1.0
+shader_param/noise = ExtResource( 21 )
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AngelWingR:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -62, -153 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AngelWingR:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 180.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AngelWingR:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AngelWingR:polygon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AngelWingL:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -35, -157 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AngelWingL:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AngelWingL:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("AngelWingL:polygon")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 354, 167, 242.16, 259.08 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("AngelBody:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -179.5 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("AngelBody:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("AngelBody:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("AngelHead:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -179.5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("AngelHead:rotation_degrees")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("AngelHead:scale")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("AngelEyeL:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 64, -234 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("AngelEyeL:rotation_degrees")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 180.0 ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("AngelEyeL:scale")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ) ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("AngelEyeL:polygon")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("AngelEyeR:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 25, -234 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("AngelEyeR:rotation_degrees")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("AngelEyeR:scale")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("AngelEyeR:polygon")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ) ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("R_AngelSword:position")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -18, -112 ) ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("R_AngelSword:rotation_degrees")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 225.0 ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("R_AngelSword:scale")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.8 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("AngelHead/AngelAura:position")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, -192.5 ) ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("AngelHead/AngelAura:rotation_degrees")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("AngelHead/AngelAura:scale")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0.894 ) ]
+}
+tracks/28/type = "value"
+tracks/28/path = NodePath("AngelEyeL:visible")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/29/type = "value"
+tracks/29/path = NodePath("AngelEyeR:visible")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/30/type = "value"
+tracks/30/path = NodePath("AngelWingL:z_index")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/31/type = "value"
+tracks/31/path = NodePath("AngelWingR:z_index")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 3 ]
+}
+tracks/32/type = "value"
+tracks/32/path = NodePath("R_AngelSword:z_index")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 4 ]
+}
+tracks/33/type = "value"
+tracks/33/path = NodePath("AngelEyeL:z_index")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+tracks/34/type = "value"
+tracks/34/path = NodePath("L_AngelSword2:position")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -18, -112 ) ]
+}
+tracks/35/type = "value"
+tracks/35/path = NodePath("L_AngelSword2:rotation_degrees")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -143.2 ]
+}
+tracks/36/type = "value"
+tracks/36/path = NodePath("L_AngelSword2:scale")
+tracks/36/interp = 1
+tracks/36/loop_wrap = true
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.768, 0.586 ) ]
+}
+tracks/37/type = "value"
+tracks/37/path = NodePath("L_AngelSword2:z_index")
+tracks/37/interp = 1
+tracks/37/loop_wrap = true
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/38/type = "value"
+tracks/38/path = NodePath("player_attack_area:monitoring")
+tracks/38/interp = 1
+tracks/38/loop_wrap = true
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/39/type = "value"
+tracks/39/path = NodePath("AngelBody:z_index")
+tracks/39/interp = 1
+tracks/39/loop_wrap = true
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/40/type = "value"
+tracks/40/path = NodePath("AngelBody/AngelBody2:visible")
+tracks/40/interp = 1
+tracks/40/loop_wrap = true
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/41/type = "value"
+tracks/41/path = NodePath("AngelEyeR:z_index")
+tracks/41/interp = 1
+tracks/41/loop_wrap = true
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/42/type = "value"
+tracks/42/path = NodePath("VfxAttack01:position")
+tracks/42/interp = 1
+tracks/42/loop_wrap = true
+tracks/42/imported = false
+tracks/42/enabled = true
+tracks/42/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -53, -117 ) ]
+}
+tracks/43/type = "value"
+tracks/43/path = NodePath("VfxAttack01:rotation_degrees")
+tracks/43/interp = 1
+tracks/43/loop_wrap = true
+tracks/43/imported = false
+tracks/43/enabled = true
+tracks/43/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/44/type = "value"
+tracks/44/path = NodePath("VfxAttack01:scale")
+tracks/44/interp = 1
+tracks/44/loop_wrap = true
+tracks/44/imported = false
+tracks/44/enabled = true
+tracks/44/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/45/type = "value"
+tracks/45/path = NodePath("VfxAttack01:polygon")
+tracks/45/interp = 1
+tracks/45/loop_wrap = true
+tracks/45/imported = false
+tracks/45/enabled = true
+tracks/45/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 317, 231, 725, 210, 786, 279, 591, 575, 197, 606, -67, 289 ) ]
+}
+tracks/46/type = "value"
+tracks/46/path = NodePath("VfxAttack01:modulate")
+tracks/46/interp = 1
+tracks/46/loop_wrap = true
+tracks/46/imported = false
+tracks/46/enabled = true
+tracks/46/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/47/type = "value"
+tracks/47/path = NodePath("VFX_dash:visible")
+tracks/47/interp = 1
+tracks/47/loop_wrap = true
+tracks/47/imported = false
+tracks/47/enabled = true
+tracks/47/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/48/type = "value"
+tracks/48/path = NodePath("VFX_dash:polygon")
+tracks/48/interp = 1
+tracks/48/loop_wrap = true
+tracks/48/imported = false
+tracks/48/enabled = true
+tracks/48/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 6.84935, 16.4384, 1.36981, 257.534, 10.9589, 497.26, 197.043, 498.453, 438.356, 500, 517.808, 252.055, 435.616, 12.3288, 201.37, 16.4384, 250.685, 252.055 ) ]
+}
+tracks/49/type = "value"
+tracks/49/path = NodePath("VfxAttack01:visible")
+tracks/49/interp = 1
+tracks/49/loop_wrap = true
+tracks/49/imported = false
+tracks/49/enabled = true
+tracks/49/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/50/type = "value"
+tracks/50/path = NodePath(".:collision_mask")
+tracks/50/interp = 1
+tracks/50/loop_wrap = true
+tracks/50/imported = false
+tracks/50/enabled = true
+tracks/50/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 6 ]
+}
+tracks/51/type = "value"
+tracks/51/path = NodePath(".:collision_layer")
+tracks/51/interp = 1
+tracks/51/loop_wrap = true
+tracks/51/imported = false
+tracks/51/enabled = true
+tracks/51/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "R_attack01"
+length = 0.65
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("AngelWingR:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.2, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -62, -153 ), Vector2( -77, -146 ), Vector2( -76.2105, -146.368 ), Vector2( -76.2105, -146.368 ), Vector2( -40, -153 ), Vector2( -40, -153 ), Vector2( -62, -153 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AngelWingR:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 180.0, 180.0, 180.0, 180.0, 180.0, 180.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AngelWingR:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ), Vector2( 1, -1 ), Vector2( 1, -1 ), Vector2( 1, -1 ), Vector2( 1, -1 ), Vector2( 1, -1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AngelWingR:polygon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 254.895, 318.684, 350, 359, 431, 295, 237.395, 266.684 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 251.789, 319.368, 312.789, 389.368, 387.789, 369.368, 245.789, 258.368 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 251.789, 319.368, 312.789, 389.368, 410.789, 362.368, 245.789, 258.368 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 251.789, 319.368, 311.789, 410.368, 468.789, 356.368, 245.789, 258.368 ), PoolVector2Array( 207.665, 296.362, 229, 333, 262, 329, 374, 346, 443, 256, 254, 275 ), PoolVector2Array( 207.665, 296.362, 229, 333, 262, 329, 374, 346, 446, 210, 254, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AngelWingL:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -35, -157 ), Vector2( 52, -149 ), Vector2( 52, -149 ), Vector2( -58, -172 ), Vector2( -58, -172 ), Vector2( -35, -157 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AngelWingL:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 46.5, 46.5, 0.0, 0.0, 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AngelWingL:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ), Vector2( 0.756, 1 ), Vector2( 0.756, 1 ), Vector2( -1, 1 ), Vector2( -1, 1 ), Vector2( -1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("AngelWingL:polygon")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.1, 0.15, 0.2, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 354, 167, 242.16, 259.08 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 361.813, 308.034, 424.149, 243.846, 269.379, 259.642 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 292.006, 318.612, 380.905, 318.974, 427.126, 248.739, 269.379, 259.642 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 275.568, 330.255, 347.979, 340.846, 424.149, 243.846, 269.379, 259.642 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 354, 167, 242.16, 259.08 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 319, 321, 342, 162, 242.16, 259.08 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 354, 167, 242.16, 259.08 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("AngelBody:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -179.5 ), Vector2( -15, -173 ), Vector2( -15, -173 ), Vector2( 11, -177 ), Vector2( 11, -177 ), Vector2( 0, -179.5 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("AngelBody:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -7.3, -7.3, 15.5, 15.5, 0.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("AngelBody:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("AngelHead:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -179.5 ), Vector2( -37, -174 ), Vector2( -37, -174 ), Vector2( 37, -173 ), Vector2( 37, -173 ), Vector2( 0, -179.5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("AngelHead:rotation_degrees")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("AngelHead:scale")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("AngelEyeL:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.35, 0.5, 0.6, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 64, -234 ), Vector2( 18, -249 ), Vector2( 18, -249 ), Vector2( 73, -227 ), Vector2( 64, -234 ), Vector2( 64, -234 ), Vector2( 77, -232 ), Vector2( 64, -234 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("AngelEyeL:rotation_degrees")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.35, 0.5, 0.6, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 180.0, 165.0, 165.0, 175.0, 180.0, 180.0, 180.0, 180.0 ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("AngelEyeL:scale")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ), Vector2( 1, -1 ), Vector2( 1, -1 ), Vector2( 1, -1 ), Vector2( 1, -1 ), Vector2( 1, -1 ) ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("AngelEyeL:polygon")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.35, 0.5, 0.6, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ), PoolVector2Array( 187, 129, 157, 157, 159, 228, 185, 265, 211, 237, 211, 145 ), PoolVector2Array( 187, 129, 157, 157, 159, 228, 185, 265, 211, 237, 211, 145 ), PoolVector2Array( 177.013, 134.79, 161.667, 161.667, 161, 220, 184.01, 260.659, 183.911, 236.576, 181.098, 158.524 ), PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ), PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ), PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ), PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("AngelEyeR:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 25, -234 ), Vector2( -34, -233 ), Vector2( -34, -233 ), Vector2( 103, -222 ), Vector2( 103, -222 ), Vector2( 25, -234 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("AngelEyeR:rotation_degrees")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -15.0, -15.0, 7.7, 7.7, 0.0 ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("AngelEyeR:scale")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.882, 1 ), Vector2( 0.882, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("AngelEyeR:polygon")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ), PoolVector2Array( 209, 113, 172, 143, 172, 229, 205, 263, 243.247, 238.899, 244.293, 140.99 ), PoolVector2Array( 209, 113, 172, 143, 172, 229, 205, 263, 243.247, 238.899, 244.293, 140.99 ), PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ), PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ), PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ) ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("R_AngelSword:position")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.35, 0.45, 0.5, 0.55, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -18, -112 ), Vector2( -62, -97 ), Vector2( -62, -97 ), Vector2( 87, -97 ), Vector2( 19, -108 ), Vector2( 19, -108 ), Vector2( 38, -114 ), Vector2( -18, -112 ) ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("R_AngelSword:rotation_degrees")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.35, 0.45, 0.5, 0.55, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 225.0, 246.8, 246.8, 84.5, 217.7, 217.7, 147.4, 225.0 ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("R_AngelSword:scale")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.8 ), Vector2( 0.8, 0.8 ), Vector2( 0.8, 0.8 ), Vector2( 0.862, 0.658 ), Vector2( 0.798, 1.308 ), Vector2( 0.769, 0.577 ), Vector2( 0.722, 0.704 ), Vector2( 0.722, 0.704 ), Vector2( 0.748, 0.736 ), Vector2( 0.8, 0.8 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("AngelHead/AngelAura:position")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -192.5 ), Vector2( -40, -181 ), Vector2( -40, -181 ), Vector2( 1, -192.5 ), Vector2( 1, -192.5 ), Vector2( 1, -192.5 ) ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("AngelHead/AngelAura:rotation_degrees")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -15.0, -15.0, 0.0, 0.0, 0.0 ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("AngelHead/AngelAura:scale")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0, 0.2, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0.894 ), Vector2( 1.339, 0.894 ), Vector2( 1, 0.894 ), Vector2( 1, 0.894 ), Vector2( 1, 0.894 ) ]
+}
+tracks/28/type = "value"
+tracks/28/path = NodePath("AngelEyeL:visible")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, true, true ]
+}
+tracks/29/type = "value"
+tracks/29/path = NodePath("AngelEyeR:visible")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"times": PoolRealArray( 0, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, true, true ]
+}
+tracks/30/type = "value"
+tracks/30/path = NodePath("AngelWingL:z_index")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"times": PoolRealArray( 0, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 0, 0, 0 ]
+}
+tracks/31/type = "value"
+tracks/31/path = NodePath("AngelWingR:z_index")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/keys = {
+"times": PoolRealArray( 0, 0.05, 0.3, 0.35, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 2, 3, 3, 3, 3 ]
+}
+tracks/32/type = "value"
+tracks/32/path = NodePath("R_AngelSword:z_index")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/keys = {
+"times": PoolRealArray( 0, 0.35, 0.45, 0.5, 0.55, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 1, 1, 1, 2, 4 ]
+}
+tracks/33/type = "value"
+tracks/33/path = NodePath("AngelEyeL:z_index")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/keys = {
+"times": PoolRealArray( 0, 0.3, 0.35, 0.5, 0.6, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 1, 1, 1, 2, 2 ]
+}
+tracks/34/type = "value"
+tracks/34/path = NodePath("L_AngelSword2:position")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.2, 0.25, 0.3, 0.4, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -18, -112 ), Vector2( 57, -106 ), Vector2( -24, -92 ), Vector2( -24, -92 ), Vector2( 17, -92 ), Vector2( 82, -95 ), Vector2( -31, -106 ), Vector2( -18, -112 ) ]
+}
+tracks/35/type = "value"
+tracks/35/path = NodePath("L_AngelSword2:rotation_degrees")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.2, 0.25, 0.3, 0.4, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -143.2, -234.5, -139.0, -139.0, -197.6, -277.1, -145.7, -143.2 ]
+}
+tracks/36/type = "value"
+tracks/36/path = NodePath("L_AngelSword2:scale")
+tracks/36/interp = 1
+tracks/36/loop_wrap = true
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.2, 0.25, 0.3, 0.35, 0.4, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.768, 0.586 ), Vector2( 0.886872, 0.704788 ), Vector2( 0.881, 0.557 ), Vector2( 0.881, 0.557 ), Vector2( 0.827, 0.655 ), Vector2( 0.835, 1.315 ), Vector2( 0.841, 0.594 ), Vector2( 0.848, 0.649 ), Vector2( 0.768, 0.586 ) ]
+}
+tracks/37/type = "value"
+tracks/37/path = NodePath("L_AngelSword2:z_index")
+tracks/37/interp = 1
+tracks/37/loop_wrap = true
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/keys = {
+"times": PoolRealArray( 0, 0.05, 0.3, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 4, 1, 1 ]
+}
+tracks/38/type = "method"
+tracks/38/path = NodePath("../player_move")
+tracks/38/interp = 1
+tracks/38/loop_wrap = true
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/keys = {
+"times": PoolRealArray( 0.65 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "reset_state"
+} ]
+}
+tracks/39/type = "value"
+tracks/39/path = NodePath("player_attack_area:monitoring")
+tracks/39/interp = 1
+tracks/39/loop_wrap = true
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/keys = {
+"times": PoolRealArray( 0, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/40/type = "audio"
+tracks/40/path = NodePath("../SFX/AudioStreamPlayer")
+tracks/40/interp = 1
+tracks/40/loop_wrap = true
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 16 )
+} ],
+"times": PoolRealArray( 0.2 )
+}
+tracks/41/type = "value"
+tracks/41/path = NodePath("VfxAttack01:position")
+tracks/41/interp = 1
+tracks/41/loop_wrap = true
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/keys = {
+"times": PoolRealArray( 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 27.5932, -131.136 ), Vector2( 27.5932, -131.136 ), Vector2( 27.5932, -131.136 ) ]
+}
+tracks/42/type = "value"
+tracks/42/path = NodePath("VfxAttack01:rotation_degrees")
+tracks/42/interp = 1
+tracks/42/loop_wrap = true
+tracks/42/imported = false
+tracks/42/enabled = true
+tracks/42/keys = {
+"times": PoolRealArray( 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -30.0 ]
+}
+tracks/43/type = "value"
+tracks/43/path = NodePath("VfxAttack01:scale")
+tracks/43/interp = 1
+tracks/43/loop_wrap = true
+tracks/43/imported = false
+tracks/43/enabled = true
+tracks/43/keys = {
+"times": PoolRealArray( 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.806565, 0.409091 ), Vector2( 0.806565, 0.409091 ), Vector2( 1, 1 ) ]
+}
+tracks/44/type = "value"
+tracks/44/path = NodePath("VfxAttack01:polygon")
+tracks/44/interp = 1
+tracks/44/loop_wrap = true
+tracks/44/imported = false
+tracks/44/enabled = true
+tracks/44/keys = {
+"times": PoolRealArray( 0.2, 0.25, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 317, 231, 80.5392, 459.333, 43.3445, 461.778, 25.9869, 459.333, 22.2674, 476.444, 12.3488, 447.111 ), PoolVector2Array( 317, 231, 360.74, 518, 250.395, 588.889, 61.9418, 584, 4.90985, 432.444, 4.90985, 427.556 ), PoolVector2Array( 317, 231, 725, 210, 786, 279, 591, 575, 197, 606, -67, 289 ), PoolVector2Array( 317, 231, 453.367, 260.671, 568.513, 335.233, 625.446, 446.623, 359.743, 394.833, 53.0194, 168.094 ), PoolVector2Array( 317, 231, 453.367, 260.671, 484.58, 270.609, 486.812, 270.743, 493.241, 275.609, 534.104, 318.831 ) ]
+}
+tracks/45/type = "value"
+tracks/45/path = NodePath("VfxAttack01:modulate")
+tracks/45/interp = 1
+tracks/45/loop_wrap = true
+tracks/45/imported = false
+tracks/45/enabled = true
+tracks/45/keys = {
+"times": PoolRealArray( 0, 0.2, 0.25, 0.45, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/46/type = "value"
+tracks/46/path = NodePath("../player_move:speed")
+tracks/46/interp = 1
+tracks/46/loop_wrap = true
+tracks/46/imported = false
+tracks/46/enabled = true
+tracks/46/keys = {
+"times": PoolRealArray( 0, 0.2, 0.25, 0.35, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1000.0, 1000.0, 0.0 ]
+}
+tracks/47/type = "value"
+tracks/47/path = NodePath("VfxAttack01:visible")
+tracks/47/interp = 1
+tracks/47/loop_wrap = true
+tracks/47/imported = false
+tracks/47/enabled = true
+tracks/47/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "R_dash"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("AngelWingR:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -62, -153 ), Vector2( -88, -170 ), Vector2( -62, -153 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AngelWingR:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 180.0, 180.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AngelWingR:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ), Vector2( 1, -1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AngelWingR:polygon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 379, 336, 476, 202, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AngelWingL:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -35, -157 ), Vector2( -68, -183 ), Vector2( -35, -157 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AngelWingL:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AngelWingL:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ), Vector2( -1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("AngelWingL:polygon")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 354, 167, 242.16, 259.08 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 351, 306, 412, 203, 255, 248 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 354, 167, 242.16, 259.08 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("AngelBody:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -179.5 ), Vector2( 0, -179.5 ), Vector2( 0, -179.5 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("AngelBody:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 23.2, 0.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("AngelBody:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("AngelHead:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -179.5 ), Vector2( 29, -181 ), Vector2( 0, -179.5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("AngelHead:rotation_degrees")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -21.8, 0.0 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("AngelHead:scale")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("AngelEyeL:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 64, -234 ), Vector2( 69.9354, -252.325 ), Vector2( 64, -234 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("AngelEyeL:rotation_degrees")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 180.0, 165.0, 180.0 ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("AngelEyeL:scale")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ), Vector2( 1, -1 ), Vector2( 1, -1 ) ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("AngelEyeL:polygon")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ), PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("AngelEyeR:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 25, -234 ), Vector2( 31.9354, -247.325 ), Vector2( 25, -234 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("AngelEyeR:rotation_degrees")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -15.0, 0.0 ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("AngelEyeR:scale")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("AngelEyeR:polygon")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ), PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ) ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("R_AngelSword:position")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -18, -112 ), Vector2( -62, -118 ), Vector2( -18, -112 ) ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("R_AngelSword:rotation_degrees")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 225.0, 246.8, 225.0 ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("R_AngelSword:scale")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.8 ), Vector2( 0.8, 0.8 ), Vector2( 0.8, 0.8 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("AngelHead/AngelAura:position")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -192.5 ), Vector2( 1, -192.5 ) ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("AngelHead/AngelAura:rotation_degrees")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("AngelHead/AngelAura:scale")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0.894 ), Vector2( 1.437, 0.894 ), Vector2( 1, 0.894 ) ]
+}
+tracks/28/type = "value"
+tracks/28/path = NodePath("AngelEyeL:visible")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/29/type = "value"
+tracks/29/path = NodePath("AngelEyeR:visible")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/30/type = "value"
+tracks/30/path = NodePath("AngelWingL:z_index")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 0 ]
+}
+tracks/31/type = "value"
+tracks/31/path = NodePath("AngelWingR:z_index")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 3, 3 ]
+}
+tracks/32/type = "value"
+tracks/32/path = NodePath("R_AngelSword:z_index")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 4, 4 ]
+}
+tracks/33/type = "value"
+tracks/33/path = NodePath("AngelEyeL:z_index")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 2 ]
+}
+tracks/34/type = "value"
+tracks/34/path = NodePath("L_AngelSword2:position")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -18, -112 ), Vector2( -70, -110 ), Vector2( -18, -112 ) ]
+}
+tracks/35/type = "value"
+tracks/35/path = NodePath("L_AngelSword2:rotation_degrees")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -143.2, -121.4, -143.2 ]
+}
+tracks/36/type = "value"
+tracks/36/path = NodePath("L_AngelSword2:scale")
+tracks/36/interp = 1
+tracks/36/loop_wrap = true
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.768, 0.586 ), Vector2( 0.768, 0.586 ), Vector2( 0.768, 0.586 ) ]
+}
+tracks/37/type = "method"
+tracks/37/path = NodePath("../player_move")
+tracks/37/interp = 1
+tracks/37/loop_wrap = true
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "reset_state"
+} ]
+}
+tracks/38/type = "value"
+tracks/38/path = NodePath("L_AngelSword2:z_index")
+tracks/38/interp = 1
+tracks/38/loop_wrap = true
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/39/type = "value"
+tracks/39/path = NodePath("../player_move:speed")
+tracks/39/interp = 1
+tracks/39/loop_wrap = true
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 1500.0, 1500.0, 0.0 ]
+}
+tracks/40/type = "audio"
+tracks/40/path = NodePath("../SFX/AudioStreamPlayer")
+tracks/40/interp = 1
+tracks/40/loop_wrap = true
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": SubResource( 17 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 15 )
+} ],
+"times": PoolRealArray( 0, 0.001 )
+}
+tracks/41/type = "value"
+tracks/41/path = NodePath("VFX_dash:visible")
+tracks/41/interp = 1
+tracks/41/loop_wrap = true
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/keys = {
+"times": PoolRealArray( 0, 0.001, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ true, true, false ]
+}
+tracks/42/type = "value"
+tracks/42/path = NodePath("VFX_dash:polygon")
+tracks/42/interp = 1
+tracks/42/loop_wrap = true
+tracks/42/imported = false
+tracks/42/enabled = true
+tracks/42/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 6.84935, 16.4384, 1.36981, 257.534, 10.9589, 497.26, 197.043, 498.453, 438.356, 500, 517.808, 252.055, 435.616, 12.3288, 201.37, 16.4384, 250.685, 252.055 ), PoolVector2Array( -71.2329, 16.4384, -210.959, 260.274, -115.068, 536.986, 209.589, 483.562, 442.466, 480.822, 517.808, 252.055, 435.616, 12.3288, 217.808, 35.6164, 250.685, 252.055 ), PoolVector2Array( 58.9041, 195.89, -267.123, 258.904, 71.2329, 353.425, 191.781, 397.26, 406.849, 490.411, 479.452, 221.918, 382.192, 1.36987, 190.411, 116.438, 250.685, 252.055 ) ]
+}
+tracks/43/type = "value"
+tracks/43/path = NodePath("VfxAttack01:visible")
+tracks/43/interp = 1
+tracks/43/loop_wrap = true
+tracks/43/imported = false
+tracks/43/enabled = true
+tracks/43/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/44/type = "value"
+tracks/44/path = NodePath("../player_move:can_dash")
+tracks/44/interp = 1
+tracks/44/loop_wrap = true
+tracks/44/imported = false
+tracks/44/enabled = true
+tracks/44/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/45/type = "value"
+tracks/45/path = NodePath(".:collision_mask")
+tracks/45/interp = 1
+tracks/45/loop_wrap = true
+tracks/45/imported = false
+tracks/45/enabled = true
+tracks/45/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 4, 4 ]
+}
+tracks/46/type = "value"
+tracks/46/path = NodePath(".:collision_layer")
+tracks/46/interp = 1
+tracks/46/loop_wrap = true
+tracks/46/imported = false
+tracks/46/enabled = true
+tracks/46/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "R_idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AngelWingR:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -62, -153 ), Vector2( -65, -191 ), Vector2( -62, -153 ), Vector2( -63, -144 ), Vector2( -62, -153 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AngelWingR:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 180.0, 180.0, 180.0, 180.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AngelWingR:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ), Vector2( 1, -1 ), Vector2( 1, -1 ), Vector2( 1, -1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AngelWingR:polygon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.7, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 266, 354, 315, 435, 450, 446, 266, 290 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 380.667, 294, 424.667, 144, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AngelWingL:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -35, -157 ), Vector2( -46, -186 ), Vector2( -35, -157 ), Vector2( -35, -142 ), Vector2( -35, -157 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AngelWingL:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AngelWingL:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("AngelWingL:polygon")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 354, 167, 242.16, 259.08 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 259, 331, 251, 388, 354, 447, 258, 300 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 354, 167, 242.16, 259.08 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 338, 162, 242.16, 259.08 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("AngelBody:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -179.5 ), Vector2( 0, -216 ), Vector2( 0, -179.5 ), Vector2( 0, -171 ), Vector2( 0, -179.5 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("AngelBody:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("AngelBody:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("AngelHead:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -179.5 ), Vector2( 0, -216 ), Vector2( 0, -179.5 ), Vector2( 0, -171 ), Vector2( 0, -179.5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("AngelHead:rotation_degrees")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("AngelHead:scale")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("AngelEyeL:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 0.999201 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 64, -234 ), Vector2( 64, -280 ), Vector2( 64, -237 ), Vector2( 64, -227.258 ), Vector2( 64, -234 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("AngelEyeL:rotation_degrees")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 180.0, 180.0, 180.0 ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("AngelEyeL:scale")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ), Vector2( 1, -1 ), Vector2( 1, -1 ) ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("AngelEyeL:polygon")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("AngelEyeR:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 25, -234 ), Vector2( 25, -277 ), Vector2( 25, -234.5 ), Vector2( 25, -224 ), Vector2( 25, -234.5 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("AngelEyeR:rotation_degrees")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("AngelEyeR:scale")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("AngelEyeR:polygon")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ), PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ), PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ) ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("R_AngelSword:position")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -18, -112 ), Vector2( -18, -148.5 ), Vector2( -18, -112 ), Vector2( -18, -103.5 ), Vector2( -18, -112 ) ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("R_AngelSword:rotation_degrees")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 225.0, 210.4, 225.0, 232.2, 225.0 ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("R_AngelSword:scale")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.8 ), Vector2( 0.8, 0.8 ), Vector2( 0.8, 0.8 ), Vector2( 0.8, 0.8 ), Vector2( 0.8, 0.8 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("AngelHead/AngelAura:position")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -192.5 ), Vector2( 1, -200 ), Vector2( 1, -192.5 ), Vector2( 1, -192.5 ), Vector2( 1, -192.5 ) ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("AngelHead/AngelAura:rotation_degrees")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("AngelHead/AngelAura:scale")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0.894 ), Vector2( 1.167, 1 ), Vector2( 1, 0.894 ), Vector2( 1, 0.894 ), Vector2( 1, 0.894 ) ]
+}
+tracks/28/type = "value"
+tracks/28/path = NodePath("AngelEyeL:visible")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/29/type = "value"
+tracks/29/path = NodePath("AngelEyeR:visible")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, true ]
+}
+tracks/30/type = "value"
+tracks/30/path = NodePath("AngelWingL:z_index")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/31/type = "value"
+tracks/31/path = NodePath("AngelWingR:z_index")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+tracks/32/type = "value"
+tracks/32/path = NodePath("R_AngelSword:z_index")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
+tracks/33/type = "value"
+tracks/33/path = NodePath("AngelEyeL:z_index")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+tracks/34/type = "value"
+tracks/34/path = NodePath("L_AngelSword2:position")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -18, -112 ) ]
+}
+tracks/35/type = "value"
+tracks/35/path = NodePath("L_AngelSword2:rotation_degrees")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -143.2, -165.0, -143.2, -135.9, -143.2 ]
+}
+tracks/36/type = "value"
+tracks/36/path = NodePath("L_AngelSword2:scale")
+tracks/36/interp = 1
+tracks/36/loop_wrap = true
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.768, 0.586 ), Vector2( 0.768, 0.586 ) ]
+}
+tracks/37/type = "value"
+tracks/37/path = NodePath("L_AngelSword2:z_index")
+tracks/37/interp = 1
+tracks/37/loop_wrap = true
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/38/type = "value"
+tracks/38/path = NodePath("player_attack_area:monitoring")
+tracks/38/interp = 1
+tracks/38/loop_wrap = true
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/39/type = "audio"
+tracks/39/path = NodePath("../SFX/AudioStreamPlayer")
+tracks/39/interp = 1
+tracks/39/loop_wrap = true
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 17 )
+} ],
+"times": PoolRealArray( 0.1 )
+}
+tracks/40/type = "value"
+tracks/40/path = NodePath("VfxAttack01:visible")
+tracks/40/interp = 1
+tracks/40/loop_wrap = true
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/41/type = "value"
+tracks/41/path = NodePath(".:collision_mask")
+tracks/41/interp = 1
+tracks/41/loop_wrap = true
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 6 ]
+}
+tracks/42/type = "value"
+tracks/42/path = NodePath(".:collision_layer")
+tracks/42/interp = 1
+tracks/42/loop_wrap = true
+tracks/42/imported = false
+tracks/42/enabled = true
+tracks/42/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "R_run"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AngelWingR:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -62, -153 ), Vector2( -65, -191 ), Vector2( -62, -153 ), Vector2( -63, -144 ), Vector2( -62, -153 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AngelWingR:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.25, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 180.0, 180.0, 180.0, 180.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AngelWingR:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.25, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ), Vector2( 1, -1 ), Vector2( 1, -1 ), Vector2( 1, -1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AngelWingR:polygon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.35, 0.45, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 266, 354, 315, 435, 450, 446, 266, 290 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 380.667, 294, 424.667, 144, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AngelWingL:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -35, -157 ), Vector2( -46, -186 ), Vector2( -35, -157 ), Vector2( -35, -142 ), Vector2( -35, -157 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AngelWingL:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AngelWingL:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("AngelWingL:polygon")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.1, 0.35, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 354, 167, 242.16, 259.08 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 259, 331, 251, 388, 354, 447, 258, 300 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 354, 167, 242.16, 259.08 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 338, 162, 242.16, 259.08 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("AngelBody:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -179.5 ), Vector2( 0, -216 ), Vector2( 0, -179.5 ), Vector2( 0, -171 ), Vector2( 0, -179.5 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("AngelBody:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 31.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("AngelBody:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("AngelHead:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -179.5 ), Vector2( 0, -216 ), Vector2( 0, -179.5 ), Vector2( 0, -171 ), Vector2( 0, -179.5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("AngelHead:rotation_degrees")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("AngelHead:scale")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("AngelEyeL:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.35, 0.4996 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 64, -234 ), Vector2( 64, -280 ), Vector2( 64, -237 ), Vector2( 64, -227.258 ), Vector2( 64, -234 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("AngelEyeL:rotation_degrees")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 180.0, 180.0, 180.0 ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("AngelEyeL:scale")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ), Vector2( 1, -1 ), Vector2( 1, -1 ) ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("AngelEyeL:polygon")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("AngelEyeR:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 25, -234 ), Vector2( 25, -277 ), Vector2( 25, -234.5 ), Vector2( 25, -224 ), Vector2( 25, -234.5 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("AngelEyeR:rotation_degrees")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("AngelEyeR:scale")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("AngelEyeR:polygon")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ), PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ), PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ) ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("R_AngelSword:position")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -18, -112 ), Vector2( -18, -148.5 ), Vector2( -18, -112 ), Vector2( -18, -103.5 ), Vector2( -18, -112 ) ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("R_AngelSword:rotation_degrees")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 225.0, 210.4, 225.0, 232.2, 225.0 ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("R_AngelSword:scale")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.8 ), Vector2( 0.8, 0.8 ), Vector2( 0.8, 0.8 ), Vector2( 0.8, 0.8 ), Vector2( 0.8, 0.8 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("AngelHead/AngelAura:position")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -192.5 ), Vector2( 1, -200 ), Vector2( 1, -192.5 ), Vector2( 1, -192.5 ), Vector2( 1, -192.5 ) ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("AngelHead/AngelAura:rotation_degrees")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("AngelHead/AngelAura:scale")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0.894 ), Vector2( 1.167, 1 ), Vector2( 1, 0.894 ), Vector2( 1, 0.894 ), Vector2( 1, 0.894 ) ]
+}
+tracks/28/type = "value"
+tracks/28/path = NodePath("AngelEyeL:visible")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/29/type = "value"
+tracks/29/path = NodePath("AngelEyeR:visible")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, true ]
+}
+tracks/30/type = "value"
+tracks/30/path = NodePath("AngelWingL:z_index")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/31/type = "value"
+tracks/31/path = NodePath("AngelWingR:z_index")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+tracks/32/type = "value"
+tracks/32/path = NodePath("R_AngelSword:z_index")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
+tracks/33/type = "value"
+tracks/33/path = NodePath("AngelEyeL:z_index")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+tracks/34/type = "value"
+tracks/34/path = NodePath("L_AngelSword2:position")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -18, -112 ) ]
+}
+tracks/35/type = "value"
+tracks/35/path = NodePath("L_AngelSword2:rotation_degrees")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -143.2, -165.0, -143.2, -135.9, -143.2 ]
+}
+tracks/36/type = "value"
+tracks/36/path = NodePath("L_AngelSword2:scale")
+tracks/36/interp = 1
+tracks/36/loop_wrap = true
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.768, 0.586 ), Vector2( 0.768, 0.586 ) ]
+}
+tracks/37/type = "value"
+tracks/37/path = NodePath("L_AngelSword2:z_index")
+tracks/37/interp = 1
+tracks/37/loop_wrap = true
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/38/type = "value"
+tracks/38/path = NodePath("../player_move:speed")
+tracks/38/interp = 1
+tracks/38/loop_wrap = true
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 300.0 ]
+}
+tracks/39/type = "audio"
+tracks/39/path = NodePath("../SFX/AudioStreamPlayer")
+tracks/39/interp = 1
+tracks/39/loop_wrap = true
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 17 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "beginning_reborn"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("AngelWingR:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.1, 1.2, 1.5, 1.7, 1.8, 1.9, 2.2, 2.3, 2.4, 2.8, 2.9, 3.3, 3.5, 3.7, 4 ),
+"transitions": PoolRealArray( 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 0.25, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 56, -371 ), Vector2( 58, -385 ), Vector2( 56, -371 ), Vector2( 58, -385 ), Vector2( 56, -371 ), Vector2( 58, -385 ), Vector2( 56, -371 ), Vector2( 58, -385 ), Vector2( 56, -371 ), Vector2( 56, -371 ), Vector2( 66, -395 ), Vector2( 56, -380 ), Vector2( -22, -385 ), Vector2( -72, -468 ), Vector2( -72, -413 ), Vector2( -72, -413 ), Vector2( -72, -390.545 ), Vector2( -72, -413 ), Vector2( -72, -303.222 ), Vector2( -72, -330.667 ), Vector2( -72, -166 ), Vector2( -72, -166 ), Vector2( -72, -166 ), Vector2( -23, -157 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AngelWingR:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.1, 1.2, 1.5, 1.7, 1.8, 1.9, 3.5, 3.7, 4 ),
+"transitions": PoolRealArray( 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 0.25, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 59.9999, 59.9999, 59.9999, 59.9999, 59.9999, 59.9999, 59.9999, 59.9999, 59.9999, 59.9999, 59.9999, 74.9999, 105.0, 150.0, 120.0, 120.0, 120.0, 120.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AngelWingR:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1.1, 4 ),
+"transitions": PoolRealArray( 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ), Vector2( 1, -1 ), Vector2( 1, -1 ), Vector2( 1, -1 ), Vector2( 1, -1 ), Vector2( 1, -1 ), Vector2( 1, -1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AngelWingR:polygon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.1, 1.2, 1.6, 1.8, 1.9, 2.3, 2.4, 2.8, 2.9, 3.3, 3.5, 3.7, 4 ),
+"transitions": PoolRealArray( 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 0.25, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 388.371, 312.344, 334.306, 120.701, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 388.371, 312.344, 334.306, 120.701, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 388.371, 312.344, 334.306, 120.701, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 388.371, 312.344, 334.306, 120.701, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 259.01, 314.285, 376.763, 268.239, 161.882, 62.056, 199.493, 263.199 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 259.01, 314.285, 376.763, 268.239, 161.882, 62.056, 199.493, 263.199 ), PoolVector2Array( 182.496, 345.759, 205.271, 307.206, 266.706, 315.615, 409.273, 354.547, 372.841, 501.444, 234.977, 376.658 ), PoolVector2Array( 202.378, 326.196, 239.024, 336.78, 266.706, 315.615, 363.88, 272.074, 311.966, 91.9909, 197.11, 258.928 ), PoolVector2Array( 202.378, 326.196, 239.024, 336.78, 266.706, 315.615, 327.043, 243.878, 259.612, 38.6706, 192.852, 240.304 ), PoolVector2Array( 202.378, 326.196, 239.024, 336.78, 247.5, 307.651, 331.328, 284.457, 447.861, 186.615, 229.421, 272.964 ), PoolVector2Array( 202.378, 326.196, 239.024, 336.78, 266.706, 315.615, 327.043, 243.878, 259.612, 38.6706, 192.852, 240.304 ), PoolVector2Array( 202.378, 326.196, 239.024, 336.78, 247.5, 307.651, 331.328, 284.457, 447.861, 186.615, 229.421, 272.964 ), PoolVector2Array( 202.378, 326.196, 239.024, 336.78, 266.706, 315.615, 327.043, 243.878, 259.612, 38.6706, 192.852, 240.304 ), PoolVector2Array( 202.378, 326.196, 241.491, 348.06, 251.732, 304.321, 367.978, 270.976, 394.141, 133.661, 214.074, 237.546 ), PoolVector2Array( 202.378, 326.196, 241.491, 348.06, 251.732, 304.321, 367.978, 270.976, 394.141, 133.661, 214.074, 237.546 ), PoolVector2Array( 191.359, 324.89, 230.206, 319.605, 257.517, 342.301, 344.182, 406.193, 206.24, 465.117, 169.297, 349.103 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AngelWingL:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.1, 1.2, 1.5, 1.7, 2.2, 2.3, 2.4, 2.8, 2.9, 3.3, 3.5, 3.7, 4 ),
+"transitions": PoolRealArray( 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 0.25, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 49, -367 ), Vector2( 50, -388 ), Vector2( 49, -367 ), Vector2( 50, -388 ), Vector2( 49, -367 ), Vector2( 50, -388 ), Vector2( 49, -367 ), Vector2( 50, -388 ), Vector2( 49, -367 ), Vector2( 49, -367 ), Vector2( 50, -388 ), Vector2( 43, -410 ), Vector2( 13, -396 ), Vector2( 13, -396 ), Vector2( 13, -373.545 ), Vector2( 13, -396 ), Vector2( 13, -286.222 ), Vector2( 13, -313.667 ), Vector2( 13, -149 ), Vector2( 13, -149 ), Vector2( 13, -149 ), Vector2( 11, -125 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AngelWingL:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.1, 1.2, 1.5, 1.7, 3.5, 3.7, 4 ),
+"transitions": PoolRealArray( 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 0.25, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -105.0, -105.0, -105.0, -105.0, -105.0, -105.0, -105.0, -105.0, -105.0, -105.0, -105.0, -74.9999, -89.9999, -89.9999, -89.9999, -89.9999 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AngelWingL:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1.1, 4 ),
+"transitions": PoolRealArray( 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 1 ),
+"update": 0,
+"values": [ Vector2( -1.31189, 1 ), Vector2( -1.31189, 1 ), Vector2( -1.31189, 1 ), Vector2( -1.31189, 1 ), Vector2( -1.31189, 1 ), Vector2( -1.31189, 1 ), Vector2( -1.31189, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("AngelWingL:polygon")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.1, 1.2, 1.6, 1.8, 1.9, 2.3, 2.4, 2.8, 2.9, 3.3, 3.5, 3.7, 4 ),
+"transitions": PoolRealArray( 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 0.25, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 354, 167, 242.16, 259.08 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 308.542, 264.796, 285.157, 142.571, 239.356, 262.199 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 354, 167, 242.16, 259.08 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 308.542, 264.796, 285.157, 142.571, 239.356, 262.199 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 354, 167, 242.16, 259.08 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 308.542, 264.796, 285.157, 142.571, 239.356, 262.199 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 354, 167, 242.16, 259.08 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 308.542, 264.796, 285.157, 142.571, 239.356, 262.199 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 354, 167, 242.16, 259.08 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 354, 167, 242.16, 259.08 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 308.542, 264.796, 285.157, 142.571, 239.356, 262.199 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 308.542, 264.796, 285.157, 142.571, 239.356, 262.199 ), PoolVector2Array( 207.665, 296.362, 227.223, 266, 264.574, 264, 334.701, 271, 357.569, 381, 240.943, 318 ), PoolVector2Array( 230.272, 314, 256.189, 301, 273.721, 280, 260, 216, 178.439, 115, 205.88, 286 ), PoolVector2Array( 230.272, 314, 256.189, 301, 273.721, 280, 260, 216, 147.186, 120, 205.88, 286 ), PoolVector2Array( 216.551, 307, 231.796, 292, 237.132, 269, 276.77, 237, 322.506, 104, 206.642, 267 ), PoolVector2Array( 230.272, 314, 256.189, 301, 273.721, 280, 260, 216, 147.186, 120, 205.88, 286 ), PoolVector2Array( 216.551, 307, 231.796, 292, 237.132, 269, 276.77, 237, 322.506, 104, 206.642, 267 ), PoolVector2Array( 230.272, 314, 256.189, 301, 273.721, 280, 260, 216, 147.186, 120, 205.88, 286 ), PoolVector2Array( 219.6, 273, 230.272, 269, 244.755, 257, 247.042, 222, 249.329, 62, 199.019, 228 ), PoolVector2Array( 219.6, 273, 230.272, 269, 244.755, 257, 247.042, 222, 249.329, 62, 199.019, 228 ), PoolVector2Array( 222.649, 262, 244.755, 253, 271.434, 238, 321.743, 169, 287.442, 58.0001, 213.502, 203 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("AngelBody:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.1, 1.2, 1.5, 1.8, 1.9, 2.2, 2.3, 2.4, 2.8, 2.9, 3.3, 3.5, 3.7 ),
+"transitions": PoolRealArray( 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 0.25, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 22.5064, -480.795 ), Vector2( 33, -446 ), Vector2( 22.5064, -480.795 ), Vector2( 33, -446 ), Vector2( 22.5064, -480.795 ), Vector2( 33, -446 ), Vector2( 22.5064, -480.795 ), Vector2( 33, -446 ), Vector2( 22.5064, -480.795 ), Vector2( 22.5064, -480.795 ), Vector2( 33, -446 ), Vector2( 33, -446 ), Vector2( 29, -476 ), Vector2( 0, -471 ), Vector2( 0, -471 ), Vector2( 0, -448.545 ), Vector2( 0, -471 ), Vector2( 0, -361.222 ), Vector2( 0, -388.667 ), Vector2( 0, -224 ), Vector2( 0, -224 ), Vector2( 0, -224 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("AngelBody:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.1, 1.2, 1.5, 1.8, 1.9, 3.5, 3.7 ),
+"transitions": PoolRealArray( 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 0.25, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -59.9999, -89.9999, -59.9999, -89.9999, -59.9999, -89.9999, -59.9999, -89.9999, -59.9999, -59.9999, -120.0, -105.0, 30.0, 0.0, 0.0, 0.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("AngelBody:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1.1 ),
+"transitions": PoolRealArray( 0.25, 0.25, 0.25, 0.25, 0.25, 0.25 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("AngelHead:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.1, 1.2, 1.5, 1.8, 1.9, 2.2, 2.3, 2.4, 2.8, 2.9, 3.3, 3.5, 3.7, 4 ),
+"transitions": PoolRealArray( 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 0.25, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 21, -481 ), Vector2( 21, -481 ), Vector2( 21, -481 ), Vector2( 21, -481 ), Vector2( 21, -481 ), Vector2( 21, -481 ), Vector2( 21, -481 ), Vector2( 21, -481 ), Vector2( 21, -481 ), Vector2( 21, -481 ), Vector2( 27, -482 ), Vector2( 27, -482 ), Vector2( 44, -480 ), Vector2( 0, -482 ), Vector2( 0, -482 ), Vector2( 0, -459.545 ), Vector2( 0, -482 ), Vector2( 0, -372.222 ), Vector2( 0, -399.667 ), Vector2( 0, -235 ), Vector2( 0, -235 ), Vector2( 0, -235 ), Vector2( -12, -199 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("AngelHead:rotation_degrees")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.1, 1.2, 1.5, 1.8, 1.9, 2.2, 3.3, 3.5, 3.7, 4 ),
+"transitions": PoolRealArray( 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 0.25, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -120.0, -89.9999, -120.0, -89.9999, -120.0, -89.9999, -120.0, -89.9999, -120.0, -120.0, -59.9999, -74.9999, 15.0, -15.0, 0.0, 0.0, 30.0, 30.0, 0.0 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("AngelHead:scale")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1.1 ),
+"transitions": PoolRealArray( 0.25, 0.25, 0.25, 0.25, 0.25, 0.25 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("AngelEyeL:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.1, 1.2, 1.5, 1.7, 1.8, 1.9, 2.2, 2.3, 2.4, 2.8, 2.9, 3.3, 3.5, 3.7, 3.9, 4 ),
+"transitions": PoolRealArray( 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 0.25, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -51, -514 ), Vector2( -40, -545 ), Vector2( -51, -514 ), Vector2( -40, -545 ), Vector2( -51, -514 ), Vector2( -40, -545 ), Vector2( -51, -514 ), Vector2( -40, -545 ), Vector2( -51, -514 ), Vector2( -51, -514 ), Vector2( -6.00001, -573 ), Vector2( -12, -558 ), Vector2( 89, -557 ), Vector2( 123, -521 ), Vector2( 49, -560 ), Vector2( 65, -543 ), Vector2( 65, -520.545 ), Vector2( 65, -543 ), Vector2( 65, -433.222 ), Vector2( 65, -460.667 ), Vector2( 65, -296 ), Vector2( 88, -249 ), Vector2( 88, -249 ), Vector2( 34, -322 ), Vector2( 10, -303 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("AngelEyeL:rotation_degrees")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.1, 1.2, 1.5, 1.7, 1.8, 1.9, 2.3, 3.3, 3.5, 3.7, 3.9, 4 ),
+"transitions": PoolRealArray( 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 0.25, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 74.9999, 89.9999, 74.9999, 89.9999, 74.9999, 89.9999, 74.9999, 89.9999, 74.9999, 74.9999, 105.0, 105.0, 165.0, 195.0, 165.0, 180.0, 180.0, 210.0, 210.0, 150.0, 135.0 ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("AngelEyeL:scale")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.1, 1.2, 1.5, 3.7, 3.9, 4 ),
+"transitions": PoolRealArray( 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 0.25, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ), Vector2( 1, -1.278 ), Vector2( 1, -1 ), Vector2( 1, -1.278 ), Vector2( 1, -1 ), Vector2( 1, -1.278 ), Vector2( 1, -1 ), Vector2( 1, -1.278 ), Vector2( 1, -1 ), Vector2( 1, -1 ), Vector2( 1, -1.278 ), Vector2( 1, -1 ), Vector2( 1, -1 ), Vector2( 1, -0.517794 ), Vector2( 1, -0.517794 ) ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("AngelEyeL:polygon")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1.1, 3.7 ),
+"transitions": PoolRealArray( 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25 ),
+"update": 0,
+"values": [ PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ), PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ), PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ), PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ), PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ), PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ), PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("AngelEyeR:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.1, 1.2, 1.5, 1.7, 1.8, 1.9, 2.2, 2.3, 2.4, 2.8, 2.9, 3.3, 3.5, 3.7, 3.8, 3.9, 4 ),
+"transitions": PoolRealArray( 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 0.25, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -43, -496 ), Vector2( -37, -526 ), Vector2( -43, -496 ), Vector2( -37, -526 ), Vector2( -43, -496 ), Vector2( -37, -526 ), Vector2( -43, -496 ), Vector2( -37, -526 ), Vector2( -43, -496 ), Vector2( -43, -496 ), Vector2( -6.99999, -548 ), Vector2( -16, -540 ), Vector2( 72, -548 ), Vector2( 99, -522 ), Vector2( 31, -553 ), Vector2( 43, -542 ), Vector2( 43, -519.545 ), Vector2( 43, -542 ), Vector2( 43, -432.222 ), Vector2( 43, -459.667 ), Vector2( 43, -295 ), Vector2( 67.8135, -258.36 ), Vector2( 67.8135, -258.36 ), Vector2( 87, -273 ), Vector2( 85.5359, -292.464 ), Vector2( 64, -286 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("AngelEyeR:rotation_degrees")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.1, 1.2, 1.5, 1.7, 1.8, 1.9, 2.3, 3.3, 3.5, 3.7, 3.8, 3.9, 4 ),
+"transitions": PoolRealArray( 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 0.25, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -105.0, -89.9999, -105.0, -89.9999, -105.0, -89.9999, -105.0, -89.9999, -105.0, -105.0, -74.9999, -74.9999, -15.0, 15.0, -15.0, 0.0, 0.0, 30.0, 30.0, 7.50002, -15.0, -15.0 ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("AngelEyeR:scale")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.1, 1.2, 1.5, 3.7, 3.8, 3.9, 4 ),
+"transitions": PoolRealArray( 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 0.25, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1.219 ), Vector2( 1, 1 ), Vector2( 1, 1.219 ), Vector2( 1, 1 ), Vector2( 1, 1.219 ), Vector2( 1, 1 ), Vector2( 1, 1.219 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1.219 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.834849, 0.815938 ), Vector2( 0.669698, 0.631876 ), Vector2( 0.669698, 0.631876 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("AngelEyeR:polygon")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1.1, 3.7, 3.8, 3.9 ),
+"transitions": PoolRealArray( 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ), PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ), PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ), PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ), PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ), PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ), PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ), PoolVector2Array( 202.275, 105.399, 180, 143, 180, 232, 201.351, 286.002, 232.079, 245.333, 234.396, 140.362 ), PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 220.91, 251.766, 224.499, 139.735 ) ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("R_AngelSword:position")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.1, 1.2, 1.5, 1.8, 1.9, 2.2, 2.3, 2.4, 2.8, 2.9, 3.3, 3.5, 3.7, 4 ),
+"transitions": PoolRealArray( 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 0.25, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 83, -388 ), Vector2( 88, -399 ), Vector2( 83, -388 ), Vector2( 88, -399 ), Vector2( 83, -388 ), Vector2( 88, -399 ), Vector2( 83, -388 ), Vector2( 88, -399 ), Vector2( 83, -388 ), Vector2( 83, -388 ), Vector2( 103, -461 ), Vector2( 112, -442 ), Vector2( -19, -364 ), Vector2( -43, -378 ), Vector2( -43, -378 ), Vector2( -39, -350 ), Vector2( -43, -378 ), Vector2( -43, -268.222 ), Vector2( -34, -305 ), Vector2( -43, -131 ), Vector2( -43, -131 ), Vector2( -43, -131 ), Vector2( 66, -166 ) ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("R_AngelSword:rotation_degrees")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.1, 1.2, 1.5, 1.8, 1.9, 2.3, 2.4, 2.8, 2.9, 3.3, 3.5, 3.7, 4 ),
+"transitions": PoolRealArray( 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 0.25, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 180.0, 150.0, 180.0, 150.0, 180.0, 150.0, 180.0, 150.0, 180.0, 180.0, 59.9999, 105.0, 180.0, 210.0, 225.0, 195.0, 225.0, 195.0, 225.0, 225.0, 225.0, 120.0 ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("R_AngelSword:scale")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1.1, 4 ),
+"transitions": PoolRealArray( 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.8 ), Vector2( 0.8, 0.8 ), Vector2( 0.8, 0.8 ), Vector2( 0.8, 0.8 ), Vector2( 0.8, 0.8 ), Vector2( 0.8, 0.8 ), Vector2( 0.8, 0.8 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("AngelHead/AngelAura:position")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1.1, 3.7, 4 ),
+"transitions": PoolRealArray( 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -192.5 ), Vector2( 1, -192.5 ), Vector2( 1, -192.5 ), Vector2( 1, -192.5 ), Vector2( 1, -192.5 ), Vector2( 1, -192.5 ), Vector2( 1, -192.5 ), Vector2( -12, -131 ) ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("AngelHead/AngelAura:rotation_degrees")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1.1, 3.7, 4 ),
+"transitions": PoolRealArray( 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("AngelHead/AngelAura:scale")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.1, 1.2, 3.7, 4 ),
+"transitions": PoolRealArray( 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 0.25, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.75, 0.754 ), Vector2( 1, 0.894 ), Vector2( 0.75, 0.754 ), Vector2( 1, 0.894 ), Vector2( 0.75, 0.754 ), Vector2( 1, 0.894 ), Vector2( 0.75, 0.754 ), Vector2( 1, 0.894 ), Vector2( 0.75, 0.754 ), Vector2( 0.75, 0.754 ), Vector2( 1, 0.894 ), Vector2( 1, 0.894 ), Vector2( 1, 1.546 ) ]
+}
+tracks/28/type = "value"
+tracks/28/path = NodePath("AngelEyeL:visible")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1.1, 3.7 ),
+"transitions": PoolRealArray( 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25 ),
+"update": 0,
+"values": [ true, true, true, true, true, true, true ]
+}
+tracks/29/type = "value"
+tracks/29/path = NodePath("AngelEyeR:visible")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1.1, 3.7 ),
+"transitions": PoolRealArray( 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25 ),
+"update": 0,
+"values": [ true, true, true, true, true, true, true ]
+}
+tracks/30/type = "value"
+tracks/30/path = NodePath("AngelWingL:z_index")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1.1, 4 ),
+"transitions": PoolRealArray( 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 1 ),
+"update": 0,
+"values": [ 0, 0, 0, 0, 0, 0, 3 ]
+}
+tracks/31/type = "value"
+tracks/31/path = NodePath("AngelWingR:z_index")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1.1 ),
+"transitions": PoolRealArray( 0.25, 0.25, 0.25, 0.25, 0.25, 0.25 ),
+"update": 0,
+"values": [ 3, 3, 3, 3, 3, 3 ]
+}
+tracks/32/type = "value"
+tracks/32/path = NodePath("R_AngelSword:z_index")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1.1, 3.9 ),
+"transitions": PoolRealArray( 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 1 ),
+"update": 0,
+"values": [ 4, 4, 4, 4, 4, 4, 2 ]
+}
+tracks/33/type = "value"
+tracks/33/path = NodePath("AngelEyeL:z_index")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1.1, 3.7, 3.8 ),
+"transitions": PoolRealArray( 0.25, 0.25, 0.25, 0.25, 0.25, 1, 1, 1 ),
+"update": 0,
+"values": [ 2, 2, 2, 2, 2, 2, 2, 1 ]
+}
+tracks/34/type = "value"
+tracks/34/path = NodePath("L_AngelSword2:position")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.1, 1.2, 1.5, 1.8, 1.9, 2.2, 2.3, 2.4, 2.8, 2.9, 3.3, 3.5, 3.7, 4 ),
+"transitions": PoolRealArray( 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 0.25, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 93.7241, -398.566 ), Vector2( 94, -418 ), Vector2( 93.7241, -398.566 ), Vector2( 94, -418 ), Vector2( 93.7241, -398.566 ), Vector2( 94, -418 ), Vector2( 93.7241, -398.566 ), Vector2( 94, -418 ), Vector2( 93.7241, -398.566 ), Vector2( 93.7241, -398.566 ), Vector2( 99.0856, -478.086 ), Vector2( 111, -461 ), Vector2( -8, -377 ), Vector2( -14, -390 ), Vector2( -14, -390 ), Vector2( -13, -357 ), Vector2( -14, -390 ), Vector2( -14, -280.222 ), Vector2( -11, -309 ), Vector2( -14, -143 ), Vector2( -14, -143 ), Vector2( -14, -143 ), Vector2( -38, -148 ) ]
+}
+tracks/35/type = "value"
+tracks/35/path = NodePath("L_AngelSword2:rotation_degrees")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.1, 1.2, 1.5, 1.8, 1.9, 2.3, 2.4, 2.8, 2.9, 3.3, 3.5, 3.7, 4 ),
+"transitions": PoolRealArray( 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 1, 0.25, 0.25, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -195.0, -225.0, -195.0, -225.0, -195.0, -225.0, -195.0, -225.0, -195.0, -195.0, -315.0, -270.0, -195.0, -165.0, -150.0, -180.0, -150.0, -180.0, -150.0, -150.0, -150.0, -120.0 ]
+}
+tracks/36/type = "value"
+tracks/36/path = NodePath("L_AngelSword2:scale")
+tracks/36/interp = 1
+tracks/36/loop_wrap = true
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1.1, 1.2, 4 ),
+"transitions": PoolRealArray( 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.768, 0.812811 ), Vector2( 0.768, 0.812811 ), Vector2( 0.768, 0.812811 ), Vector2( 0.768, 0.812811 ), Vector2( 0.768, 0.812811 ), Vector2( 0.768, 0.812811 ), Vector2( 0.768, 0.750442 ), Vector2( 0.768, 0.750442 ) ]
+}
+tracks/37/type = "value"
+tracks/37/path = NodePath("L_AngelSword2:z_index")
+tracks/37/interp = 1
+tracks/37/loop_wrap = true
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1.1 ),
+"transitions": PoolRealArray( 0.25, 0.25, 0.25, 0.25, 0.25, 0.25 ),
+"update": 0,
+"values": [ 1, 1, 1, 1, 1, 1 ]
+}
+tracks/38/type = "value"
+tracks/38/path = NodePath("player_attack_area:monitoring")
+tracks/38/interp = 1
+tracks/38/loop_wrap = true
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/39/type = "value"
+tracks/39/path = NodePath("AngelBody:z_index")
+tracks/39/interp = 1
+tracks/39/loop_wrap = true
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 2 ]
+}
+tracks/40/type = "value"
+tracks/40/path = NodePath("AngelBody/AngelBody2:visible")
+tracks/40/interp = 1
+tracks/40/loop_wrap = true
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/41/type = "value"
+tracks/41/path = NodePath("AngelEyeR:z_index")
+tracks/41/interp = 1
+tracks/41/loop_wrap = true
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/keys = {
+"times": PoolRealArray( 0, 3.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 1 ]
+}
+tracks/42/type = "method"
+tracks/42/path = NodePath("..")
+tracks/42/interp = 1
+tracks/42/loop_wrap = true
+tracks/42/imported = false
+tracks/42/enabled = true
+tracks/42/keys = {
+"times": PoolRealArray( 4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "reborn"
+} ]
+}
+tracks/43/type = "audio"
+tracks/43/path = NodePath("../SFX/AudioStreamPlayer")
+tracks/43/interp = 1
+tracks/43/loop_wrap = true
+tracks/43/imported = false
+tracks/43/enabled = true
+tracks/43/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 18 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 18 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 18 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 13 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 17 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 17 )
+} ],
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 2.3, 2.7 )
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "beginning_shake"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("AngelWingR:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 56, -371 ), Vector2( 58, -385 ), Vector2( 56, -371 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AngelWingR:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1, 1 ),
+"update": 0,
+"values": [ 59.9999, 59.9999, 59.9999 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AngelWingR:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ), Vector2( 1, -1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AngelWingR:polygon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 388.371, 312.344, 334.306, 120.701, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AngelWingL:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 49, -367 ), Vector2( 50, -388 ), Vector2( 49, -367 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AngelWingL:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1, 1 ),
+"update": 0,
+"values": [ -105.0, -105.0, -105.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AngelWingL:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ Vector2( -1.31189, 1 ), Vector2( -1.31189, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("AngelWingL:polygon")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 354, 167, 242.16, 259.08 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 308.542, 264.796, 285.157, 142.571, 239.356, 262.199 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 354, 167, 242.16, 259.08 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("AngelBody:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 22.5064, -480.795 ), Vector2( 33, -446 ), Vector2( 22.5064, -480.795 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("AngelBody:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1, 1 ),
+"update": 0,
+"values": [ -59.9999, -89.9999, -59.9999 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("AngelBody:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("AngelHead:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 21, -481 ), Vector2( 21, -481 ), Vector2( 21, -481 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("AngelHead:rotation_degrees")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1, 1 ),
+"update": 0,
+"values": [ -120.0, -89.9999, -120.0 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("AngelHead:scale")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("AngelEyeL:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -51, -514 ), Vector2( -40, -545 ), Vector2( -51, -514 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("AngelEyeL:rotation_degrees")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1, 1 ),
+"update": 0,
+"values": [ 74.9999, 89.9999, 74.9999 ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("AngelEyeL:scale")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ), Vector2( 1, -1.278 ), Vector2( 1, -1 ) ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("AngelEyeL:polygon")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ), PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("AngelEyeR:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -43, -496 ), Vector2( -37, -526 ), Vector2( -43, -496 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("AngelEyeR:rotation_degrees")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1, 1 ),
+"update": 0,
+"values": [ -105.0, -89.9999, -105.0 ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("AngelEyeR:scale")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1.219 ), Vector2( 1, 1 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("AngelEyeR:polygon")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ), PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ) ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("R_AngelSword:position")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 83, -388 ), Vector2( 88, -399 ), Vector2( 83, -388 ) ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("R_AngelSword:rotation_degrees")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1, 1 ),
+"update": 0,
+"values": [ 180.0, 150.0, 180.0 ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("R_AngelSword:scale")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.8 ), Vector2( 0.8, 0.8 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("AngelHead/AngelAura:position")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -192.5 ), Vector2( 1, -192.5 ) ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("AngelHead/AngelAura:rotation_degrees")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("AngelHead/AngelAura:scale")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.75, 0.754 ), Vector2( 1, 0.894 ), Vector2( 0.75, 0.754 ) ]
+}
+tracks/28/type = "value"
+tracks/28/path = NodePath("AngelEyeL:visible")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ true, true ]
+}
+tracks/29/type = "value"
+tracks/29/path = NodePath("AngelEyeR:visible")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ true, true ]
+}
+tracks/30/type = "value"
+tracks/30/path = NodePath("AngelWingL:z_index")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ 0, 0 ]
+}
+tracks/31/type = "value"
+tracks/31/path = NodePath("AngelWingR:z_index")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ 3, 3 ]
+}
+tracks/32/type = "value"
+tracks/32/path = NodePath("R_AngelSword:z_index")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ 4, 4 ]
+}
+tracks/33/type = "value"
+tracks/33/path = NodePath("AngelEyeL:z_index")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ 2, 2 ]
+}
+tracks/34/type = "value"
+tracks/34/path = NodePath("L_AngelSword2:position")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 93.7241, -398.566 ), Vector2( 94, -418 ), Vector2( 93.7241, -398.566 ) ]
+}
+tracks/35/type = "value"
+tracks/35/path = NodePath("L_AngelSword2:rotation_degrees")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1, 1 ),
+"update": 0,
+"values": [ -195.0, -225.0, -195.0 ]
+}
+tracks/36/type = "value"
+tracks/36/path = NodePath("L_AngelSword2:scale")
+tracks/36/interp = 1
+tracks/36/loop_wrap = true
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ Vector2( 0.768, 0.812811 ), Vector2( 0.768, 0.812811 ) ]
+}
+tracks/37/type = "value"
+tracks/37/path = NodePath("L_AngelSword2:z_index")
+tracks/37/interp = 1
+tracks/37/loop_wrap = true
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ 1, 1 ]
+}
+tracks/38/type = "value"
+tracks/38/path = NodePath("player_attack_area:monitoring")
+tracks/38/interp = 1
+tracks/38/loop_wrap = true
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/39/type = "value"
+tracks/39/path = NodePath("AngelBody/AngelBody2:visible")
+tracks/39/interp = 1
+tracks/39/loop_wrap = true
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/40/type = "value"
+tracks/40/path = NodePath("AngelBody:z_index")
+tracks/40/interp = 1
+tracks/40/loop_wrap = true
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/41/type = "audio"
+tracks/41/path = NodePath("../SFX/AudioStreamPlayer")
+tracks/41/interp = 1
+tracks/41/loop_wrap = true
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 17 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/42/type = "value"
+tracks/42/path = NodePath("VFX_dash:visible")
+tracks/42/interp = 1
+tracks/42/loop_wrap = true
+tracks/42/imported = false
+tracks/42/enabled = true
+tracks/42/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AngelWingR:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -62, -153 ), Vector2( -99, -140 ), Vector2( -99, -140 ), Vector2( -99, -140 ), Vector2( -80, -34 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AngelWingR:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 180.0, 165.0, 165.0, 165.0, 90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AngelWingR:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AngelWingR:polygon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 254.14, 341.405, 333.106, 334.74, 291.223, 108.884, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 254.14, 341.405, 333.106, 334.74, 291.223, 108.884, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 254.14, 341.405, 333.106, 334.74, 291.223, 108.884, 229, 275 ), PoolVector2Array( 218, 298, 239.024, 336.78, 254.14, 341.405, 308, 258, 288, 61, 235, 250 ), PoolVector2Array( 187, 295, 188, 324, 233, 314, 308, 258, 288, 61, 224, 222 ), PoolVector2Array( 239, 289, 266, 318, 277, 303, 308, 258, 288, 61, 253, 234 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AngelWingL:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -35, -157 ), Vector2( -35, -157 ), Vector2( -55, -96 ), Vector2( -66, -75 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AngelWingL:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -60.0, -60.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AngelWingL:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("AngelWingL:polygon")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 354, 167, 242.16, 259.08 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 316, 146, 242.16, 259.08 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 316, 146, 242.16, 259.08 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 316, 146, 242.16, 259.08 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("AngelBody:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -179.5 ), Vector2( -45, -179.5 ), Vector2( -45, -179.5 ), Vector2( -45, -179.5 ), Vector2( -74, -141 ), Vector2( -106, -131 ), Vector2( -101, -76 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("AngelBody:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -15.0, -15.0, -15.0, -45.0, -90.0, -75.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("AngelBody:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("AngelHead:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -179.5 ), Vector2( 0, -179.5 ), Vector2( -44, -180 ), Vector2( -44, -180 ), Vector2( -97, -100 ), Vector2( -116, -140 ), Vector2( -111, -105 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("AngelHead:rotation_degrees")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -30.0, -30.0, -90.0, -105.0, -90.0 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("AngelHead:scale")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("AngelEyeL:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 64, -234 ), Vector2( 64, -234 ), Vector2( -17.7825, -269.214 ), Vector2( -17.7825, -269.214 ), Vector2( -138, -166 ), Vector2( -169, -188 ), Vector2( -156, -167 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("AngelEyeL:rotation_degrees")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 180.0, 180.0, 150.0, 150.0, 112.7, 90.0, 105.0 ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("AngelEyeL:scale")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ) ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("AngelEyeL:polygon")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.5, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ), PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ), PoolVector2Array( 187.75, 131.347, 154.047, 166.971, 148.432, 215.246, 181.53, 266.574, 195.305, 212.433, 191.652, 144.105 ), PoolVector2Array( 187.75, 131.347, 154.047, 166.971, 148.432, 215.246, 181.53, 266.574, 195.305, 212.433, 191.652, 144.105 ), PoolVector2Array( 196.936, 113.569, 159.898, 166.796, 157.323, 218.905, 182.52, 263.962, 197.892, 229.776, 193.535, 157.174 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("AngelEyeR:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 25, -234 ), Vector2( 25, -234 ), Vector2( -56.7825, -269.214 ), Vector2( -56.7825, -269.214 ), Vector2( -168.893, -157.618 ), Vector2( -191, -161 ), Vector2( -176, -153 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("AngelEyeR:rotation_degrees")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -30.0, -30.0, -90.0, -105.0, -74.6 ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("AngelEyeR:scale")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("AngelEyeR:polygon")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.5, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ), PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ), PoolVector2Array( 200.966, 102.893, 152.047, 141.622, 147.554, 231.404, 204.372, 284.993, 258.255, 245.665, 262.382, 154.517 ), PoolVector2Array( 200.966, 102.893, 152.047, 141.622, 147.554, 231.404, 204.372, 284.993, 258.255, 245.665, 262.382, 154.517 ), PoolVector2Array( 206.241, 127.046, 165.905, 165.125, 170.061, 247.997, 204.372, 284.993, 244.885, 252.281, 242.461, 160.634 ) ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("R_AngelSword:position")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -18, -112 ), Vector2( -59, -105 ), Vector2( -59, -105 ), Vector2( -59, -105 ), Vector2( -56, -54 ), Vector2( -64, -20 ), Vector2( -64, -20 ) ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("R_AngelSword:rotation_degrees")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 225.0, 225.0, 240.0, 240.0, 255.0, 285.0, 270.0 ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("R_AngelSword:scale")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.8 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("AngelHead/AngelAura:position")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -192.5 ), Vector2( 1, -192.5 ), Vector2( -7.26802, -219.073 ), Vector2( -84.6507, -220.469 ) ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("AngelHead/AngelAura:rotation_degrees")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 45.0, 90.0 ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("AngelHead/AngelAura:scale")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0.894 ), Vector2( 1, 0.894 ), Vector2( 0.72, 0.559 ), Vector2( 1.69, 0.894 ), Vector2( 1.69, 0.894 ) ]
+}
+tracks/28/type = "value"
+tracks/28/path = NodePath("AngelEyeL:visible")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/29/type = "value"
+tracks/29/path = NodePath("AngelEyeR:visible")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/30/type = "value"
+tracks/30/path = NodePath("AngelWingL:z_index")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/31/type = "value"
+tracks/31/path = NodePath("AngelWingR:z_index")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 3 ]
+}
+tracks/32/type = "value"
+tracks/32/path = NodePath("R_AngelSword:z_index")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 4 ]
+}
+tracks/33/type = "value"
+tracks/33/path = NodePath("AngelEyeL:z_index")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+tracks/34/type = "value"
+tracks/34/path = NodePath("L_AngelSword2:position")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -18, -112 ), Vector2( -48, -108 ), Vector2( -42, -108.8 ), Vector2( -42, -108.8 ), Vector2( -34, -58 ) ]
+}
+tracks/35/type = "value"
+tracks/35/path = NodePath("L_AngelSword2:rotation_degrees")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -143.2, -143.2, -105.0, -105.0, -90.0 ]
+}
+tracks/36/type = "value"
+tracks/36/path = NodePath("L_AngelSword2:scale")
+tracks/36/interp = 1
+tracks/36/loop_wrap = true
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.768, 0.586 ) ]
+}
+tracks/37/type = "value"
+tracks/37/path = NodePath("L_AngelSword2:z_index")
+tracks/37/interp = 1
+tracks/37/loop_wrap = true
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/38/type = "audio"
+tracks/38/path = NodePath("../SFX/AudioStreamPlayer")
+tracks/38/interp = 1
+tracks/38/loop_wrap = true
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 18 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 24 )
+} ],
+"times": PoolRealArray( 0, 0.2 )
+}
+tracks/39/type = "method"
+tracks/39/path = NodePath("..")
+tracks/39/interp = 1
+tracks/39/loop_wrap = true
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "on_player_died"
+} ]
+}
+tracks/40/type = "value"
+tracks/40/path = NodePath("VFX_dash:visible")
+tracks/40/interp = 1
+tracks/40/loop_wrap = true
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/41/type = "value"
+tracks/41/path = NodePath("VfxAttack01:visible")
+tracks/41/interp = 1
+tracks/41/loop_wrap = true
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "hitted"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("AngelWingR:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -62, -153 ), Vector2( -99, -140 ), Vector2( -99, -140 ), Vector2( -62, -153 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AngelWingR:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 180.0, 165.0, 165.0, 180.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AngelWingR:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ), Vector2( 1, -1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AngelWingR:polygon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 254.14, 341.405, 333.106, 334.74, 291.223, 108.884, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 254.14, 341.405, 333.106, 334.74, 291.223, 108.884, 229, 275 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AngelWingL:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -35, -157 ), Vector2( -35, -157 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AngelWingL:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AngelWingL:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ), Vector2( -1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("AngelWingL:polygon")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 354, 167, 242.16, 259.08 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 316, 146, 242.16, 259.08 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 316, 146, 242.16, 259.08 ), PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 354, 167, 242.16, 259.08 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("AngelBody:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -179.5 ), Vector2( -45, -179.5 ), Vector2( -45, -179.5 ), Vector2( 0, -179.5 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("AngelBody:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -15.0, -15.0, 0.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("AngelBody:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("AngelHead:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -179.5 ), Vector2( 0, -179.5 ), Vector2( -44, -180 ), Vector2( 0, -179.5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("AngelHead:rotation_degrees")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -30.0, 0.0 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("AngelHead:scale")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("AngelEyeL:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 64, -234 ), Vector2( 64, -234 ), Vector2( -17.7825, -269.214 ), Vector2( 64, -234 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("AngelEyeL:rotation_degrees")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 180.0, 180.0, 150.0, 180.0 ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("AngelEyeL:scale")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ), Vector2( 1, -1 ) ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("AngelEyeL:polygon")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ), PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ), PoolVector2Array( 187.75, 131.347, 154.047, 166.971, 148.432, 215.246, 181.53, 266.574, 195.305, 212.433, 191.652, 144.105 ), PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("AngelEyeR:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 25, -234 ), Vector2( 25, -234 ), Vector2( -56.7825, -269.214 ), Vector2( 25, -234 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("AngelEyeR:rotation_degrees")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -30.0, 0.0 ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("AngelEyeR:scale")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("AngelEyeR:polygon")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ), PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ), PoolVector2Array( 200.966, 102.893, 152.047, 141.622, 147.554, 231.404, 204.372, 284.993, 258.255, 245.665, 262.382, 154.517 ), PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ) ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("R_AngelSword:position")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -18, -112 ), Vector2( -59, -105 ), Vector2( -59, -105 ), Vector2( -18, -112 ) ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("R_AngelSword:rotation_degrees")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 225.0, 225.0, 240.0, 225.0 ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("R_AngelSword:scale")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.8 ), Vector2( 0.8, 0.8 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("AngelHead/AngelAura:position")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -192.5 ), Vector2( 1, -192.5 ) ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("AngelHead/AngelAura:rotation_degrees")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("AngelHead/AngelAura:scale")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.72, 0.559 ), Vector2( 1.69, 0.894 ), Vector2( 0.72, 0.559 ), Vector2( 1.69, 0.894 ), Vector2( 1, 0.894 ) ]
+}
+tracks/28/type = "value"
+tracks/28/path = NodePath("AngelEyeL:visible")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ true, true ]
+}
+tracks/29/type = "value"
+tracks/29/path = NodePath("AngelEyeR:visible")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ true, true ]
+}
+tracks/30/type = "value"
+tracks/30/path = NodePath("AngelWingL:z_index")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 0 ]
+}
+tracks/31/type = "value"
+tracks/31/path = NodePath("AngelWingR:z_index")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 3, 3 ]
+}
+tracks/32/type = "value"
+tracks/32/path = NodePath("R_AngelSword:z_index")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 4, 4 ]
+}
+tracks/33/type = "value"
+tracks/33/path = NodePath("AngelEyeL:z_index")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 2, 2 ]
+}
+tracks/34/type = "value"
+tracks/34/path = NodePath("L_AngelSword2:position")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -18, -112 ), Vector2( -48, -108 ), Vector2( -42, -108.8 ), Vector2( -18, -112 ) ]
+}
+tracks/35/type = "value"
+tracks/35/path = NodePath("L_AngelSword2:rotation_degrees")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -143.2, -143.2, -105.0, -143.2 ]
+}
+tracks/36/type = "value"
+tracks/36/path = NodePath("L_AngelSword2:scale")
+tracks/36/interp = 1
+tracks/36/loop_wrap = true
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.768, 0.586 ), Vector2( 0.768, 0.586 ) ]
+}
+tracks/37/type = "value"
+tracks/37/path = NodePath("L_AngelSword2:z_index")
+tracks/37/interp = 1
+tracks/37/loop_wrap = true
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1, 1 ]
+}
+tracks/38/type = "method"
+tracks/38/path = NodePath("../player_move")
+tracks/38/interp = 1
+tracks/38/loop_wrap = true
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "turn_on_no_damage"
+}, {
+"args": [  ],
+"method": "reset_state"
+} ]
+}
+tracks/39/type = "value"
+tracks/39/path = NodePath("../player_move:speed")
+tracks/39/interp = 1
+tracks/39/loop_wrap = true
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1000.0, 0.0 ]
+}
+tracks/40/type = "value"
+tracks/40/path = NodePath("player_attack_area:monitoring")
+tracks/40/interp = 1
+tracks/40/loop_wrap = true
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/41/type = "audio"
+tracks/41/path = NodePath("../SFX/AudioStreamPlayer")
+tracks/41/interp = 1
+tracks/41/loop_wrap = true
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 18 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/42/type = "value"
+tracks/42/path = NodePath("VfxAttack01:visible")
+tracks/42/interp = 1
+tracks/42/loop_wrap = true
+tracks/42/imported = false
+tracks/42/enabled = true
+tracks/42/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/43/type = "value"
+tracks/43/path = NodePath("../player_move:can_dash")
+tracks/43/interp = 1
+tracks/43/loop_wrap = true
+tracks/43/imported = false
+tracks/43/enabled = true
+tracks/43/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AngelWingR:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -56, -137.171 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AngelWingR:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 180.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AngelWingR:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AngelWingR:polygon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 342.16, 304.376, 414.286, 161.171, 242.16, 259.08 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AngelWingL:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 56, -137.171 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AngelWingL:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AngelWingL:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("AngelWingL:polygon")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 342.16, 304.376, 414.286, 161.171, 242.16, 259.08 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("AngelBody:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -179.5 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("AngelBody:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("AngelBody:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("AngelHead:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -179.5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("AngelHead:rotation_degrees")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("AngelHead:scale")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("AngelEyeL:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -48, -234.5 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("AngelEyeL:rotation_degrees")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 180.0 ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("AngelEyeL:scale")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ) ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("AngelEyeL:polygon")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ PoolVector2Array( 200.739, 115.206, 154.746, 144.125, 154.746, 235.066, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("AngelEyeR:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 48, -234.5 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("AngelEyeR:rotation_degrees")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("AngelEyeR:scale")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("AngelEyeR:polygon")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ PoolVector2Array( 200.739, 115.206, 154.746, 144.125, 154.746, 235.066, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 ) ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("R_AngelSword:position")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -80, -119.5 ) ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("R_AngelSword:rotation_degrees")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 212.9 ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("R_AngelSword:scale")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.8 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("AngelHead/AngelAura:position")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, -370.5 ) ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("AngelHead/AngelAura:rotation_degrees")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("AngelHead/AngelAura:scale")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0.894 ) ]
+}
+tracks/28/type = "value"
+tracks/28/path = NodePath("AngelEyeL:visible")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/29/type = "value"
+tracks/29/path = NodePath("AngelEyeR:visible")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/30/type = "value"
+tracks/30/path = NodePath("AngelWingL:z_index")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/31/type = "value"
+tracks/31/path = NodePath("AngelWingR:z_index")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/32/type = "value"
+tracks/32/path = NodePath("R_AngelSword:z_index")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/33/type = "value"
+tracks/33/path = NodePath("VfxAttack01:visible")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="CapsuleShape2D" id=11]
+radius = 114.0
+height = 244.0
+
+[sub_resource type="Animation" id=14]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Spear:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 49, -328 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "out"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Spear:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 182, -820 ), Vector2( 1120, -3686 ) ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "pull"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Spear:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 49, -328 ), Vector2( 182, -820 ) ]
+}
+
+[sub_resource type="GradientTexture2D" id=48]
+gradient = ExtResource( 26 )
+width = 512
+height = 512
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+
+[node name="player" type="Node2D"]
+script = ExtResource( 4 )
+input_time = 0.2
+
+[node name="get_hit_timer" type="Timer" parent="."]
+
+[node name="hit_timer" type="Timer" parent="."]
+
+[node name="input_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="player_move" type="Node2D" parent="."]
+script = ExtResource( 1 )
+speed = 1000.0
+no_damage_time = 1.5
+
+[node name="player_size" type="Node2D" parent="."]
+script = ExtResource( 5 )
+origin_size = Vector2( 0.5, 0.5 )
+
+[node name="player_body" type="KinematicBody2D" parent="." groups=["player"]]
+material = SubResource( 49 )
+collision_mask = 6
+script = ExtResource( 11 )
+
+[node name="VfxAttack01" type="Polygon2D" parent="player_body"]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -53, -117 )
+z_index = 4
+offset = Vector2( -328, -217 )
+texture = ExtResource( 19 )
+polygon = PoolVector2Array( 317, 231, 725, 210, 786, 279, 591, 575, 197, 606, -67, 289 )
+uv = PoolVector2Array( 317, 231, 725, 210, 781, 350, 591, 575, 197, 606, -67, 289 )
+polygons = [ PoolIntArray( 0, 1, 2 ), PoolIntArray( 0, 3, 4 ), PoolIntArray( 0, 3, 2 ), PoolIntArray( 0, 4, 5 ) ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_body"]
+scale = Vector2( 1, 0.5 )
+shape = SubResource( 10 )
+
+[node name="AngelWingR" type="Polygon2D" parent="player_body"]
+material = SubResource( 21 )
+use_parent_material = true
+position = Vector2( -62, -153 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+z_index = 3
+offset = Vector2( -260, -286 )
+texture = ExtResource( 7 )
+polygon = PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 258, 318, 357, 301, 414.286, 161.171, 229, 275 )
+uv = PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 342.16, 304.376, 414.286, 161.171, 242.16, 259.08 )
+polygons = [ PoolIntArray( 4, 5, 2, 3 ), PoolIntArray( 5, 0, 1, 2 ) ]
+bones = [ "root", PoolRealArray( 1, 1, 0, 0, 0, 0 ), "root/wing", PoolRealArray( 0, 0, 1, 1, 1, 1 ) ]
+
+[node name="AngelWingL" type="Polygon2D" parent="player_body"]
+material = SubResource( 22 )
+use_parent_material = true
+position = Vector2( -35, -157 )
+scale = Vector2( -1, 1 )
+offset = Vector2( -260, -286 )
+texture = ExtResource( 7 )
+polygon = PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 311, 292, 354, 167, 242.16, 259.08 )
+uv = PoolVector2Array( 207.665, 296.362, 239.024, 336.78, 273.868, 312.39, 342.16, 304.376, 414.286, 161.171, 242.16, 259.08 )
+polygons = [ PoolIntArray( 4, 5, 2, 3 ), PoolIntArray( 5, 0, 1, 2 ) ]
+bones = [ "root", PoolRealArray( 1, 1, 0, 0, 0, 0 ), "root/wing", PoolRealArray( 0, 0, 1, 1, 1, 1 ) ]
+
+[node name="AngelBody" type="Sprite" parent="player_body"]
+material = SubResource( 23 )
+use_parent_material = true
+position = Vector2( 0, -179.5 )
+z_index = 1
+texture = ExtResource( 3 )
+
+[node name="AngelBody2" type="Polygon2D" parent="player_body/AngelBody"]
+use_parent_material = true
+position = Vector2( -3.25226, 65.9562 )
+z_index = 1
+offset = Vector2( -197, -315 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 222, 232, 142, 260, 143, 402, 220, 429 )
+uv = PoolVector2Array( 222, 232, 142, 260, 143, 402, 220, 429 )
+polygons = [ PoolIntArray( 1, 0, 3, 2 ) ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Spear" type="Sprite" parent="player_body"]
+position = Vector2( 49, -328 )
+rotation = 0.261799
+scale = Vector2( 0.779187, 0.779187 )
+z_index = 1
+texture = ExtResource( 14 )
+
+[node name="AngelHead" type="Sprite" parent="player_body"]
+material = SubResource( 24 )
+use_parent_material = true
+position = Vector2( 0, -179.5 )
+z_index = 2
+texture = ExtResource( 2 )
+
+[node name="AngelAura" type="Sprite" parent="player_body/AngelHead"]
+material = SubResource( 25 )
+position = Vector2( 1, -192.5 )
+scale = Vector2( 1, 0.894 )
+texture = ExtResource( 9 )
+region_filter_clip = true
+
+[node name="AngelAura" type="Sprite" parent="player_body/AngelHead/AngelAura"]
+modulate = Color( 1, 1, 0, 1 )
+material = SubResource( 26 )
+z_index = 1
+texture = ExtResource( 9 )
+region_filter_clip = true
+
+[node name="AngelEyeL" type="Polygon2D" parent="player_body"]
+material = SubResource( 19 )
+use_parent_material = true
+position = Vector2( 64, -234 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+z_index = 2
+offset = Vector2( -200, -191 )
+texture = ExtResource( 8 )
+polygon = PoolVector2Array( 186, 137, 164, 164, 162, 216, 184, 251, 202, 216, 200, 156 )
+uv = PoolVector2Array( 200.739, 115.206, 154.746, 144.125, 154.746, 235.066, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 5, 4, 3 ) ]
+
+[node name="AngelEyeR" type="Polygon2D" parent="player_body"]
+material = SubResource( 20 )
+use_parent_material = true
+position = Vector2( 25, -234 )
+z_index = 1
+offset = Vector2( -200, -191 )
+texture = ExtResource( 8 )
+polygon = PoolVector2Array( 200.739, 115.206, 180, 143, 180, 232, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 )
+uv = PoolVector2Array( 200.739, 115.206, 154.746, 144.125, 154.746, 235.066, 200.042, 263.986, 243.247, 238.899, 244.293, 140.99 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 5, 4, 3 ) ]
+
+[node name="R_AngelSword" type="Sprite" parent="player_body"]
+material = SubResource( 17 )
+use_parent_material = true
+position = Vector2( -18, -112 )
+rotation = 3.92699
+scale = Vector2( 0.8, 0.8 )
+z_index = 4
+texture = ExtResource( 6 )
+offset = Vector2( 0.381943, -104.379 )
+
+[node name="Position_pick" type="Position2D" parent="player_body/R_AngelSword"]
+position = Vector2( 5.30331, -189.151 )
+
+[node name="Position_base" type="Position2D" parent="player_body/R_AngelSword"]
+position = Vector2( 0, -44.1942 )
+
+[node name="L_AngelSword2" type="Sprite" parent="player_body"]
+material = SubResource( 18 )
+use_parent_material = true
+position = Vector2( -18, -112 )
+rotation = -2.49931
+scale = Vector2( 0.768, 0.586 )
+z_index = 1
+texture = ExtResource( 6 )
+offset = Vector2( 0.381943, -104.379 )
+
+[node name="Position_pick" type="Position2D" parent="player_body/L_AngelSword2"]
+position = Vector2( 0.700005, -192.49 )
+
+[node name="Position_base" type="Position2D" parent="player_body/L_AngelSword2"]
+position = Vector2( 1.59967, -39.9292 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="player_body"]
+autoplay = "beginning_shake"
+anims/RESET = SubResource( 1 )
+anims/R_attack01 = SubResource( 2 )
+anims/R_dash = SubResource( 3 )
+anims/R_idle = SubResource( 4 )
+anims/R_run = SubResource( 5 )
+anims/beginning_reborn = SubResource( 12 )
+anims/beginning_shake = SubResource( 13 )
+anims/die = SubResource( 7 )
+anims/hitted = SubResource( 8 )
+anims/idle = SubResource( 6 )
+
+[node name="player_attack_area" type="Area2D" parent="player_body"]
+collision_layer = 0
+collision_mask = 2
+monitoring = false
+script = ExtResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_body/player_attack_area"]
+position = Vector2( 151, 30 )
+rotation = 1.5708
+shape = SubResource( 11 )
+
+[node name="spear" type="AnimationPlayer" parent="player_body"]
+anims/RESET = SubResource( 14 )
+anims/out = SubResource( 15 )
+anims/pull = SubResource( 16 )
+
+[node name="Sprite" type="Sprite" parent="player_body"]
+modulate = Color( 1, 1, 1, 0.4 )
+scale = Vector2( 0.4, 0.15 )
+texture = ExtResource( 12 )
+
+[node name="VFX_dash" type="Polygon2D" parent="player_body"]
+visible = false
+position = Vector2( -48, -168 )
+z_index = 5
+offset = Vector2( -255, -259 )
+texture = SubResource( 48 )
+polygon = PoolVector2Array( 6.84935, 16.4384, 1.36981, 257.534, 10.9589, 497.26, 197.043, 498.453, 438.356, 500, 517.808, 252.055, 435.616, 12.3288, 201.37, 16.4384, 250.685, 252.055 )
+uv = PoolVector2Array( 6.84935, 16.4384, 1.36981, 257.534, 10.9589, 497.26, 197.043, 498.453, 438.356, 500, 517.808, 252.055, 435.616, 12.3288, 201.37, 16.4384, 250.685, 252.055 )
+polygons = [ PoolIntArray( 8, 1, 2 ), PoolIntArray( 8, 2, 3 ), PoolIntArray( 1, 0, 8 ), PoolIntArray( 8, 0, 7 ), PoolIntArray( 8, 7, 6 ), PoolIntArray( 8, 6, 5 ), PoolIntArray( 8, 5, 4 ), PoolIntArray( 8, 4, 3 ) ]
+internal_vertex_count = 1
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 18 )
+volume_db = -5.0
+
+[connection signal="timeout" from="get_hit_timer" to="player_move" method="get_hit_color"]
+[connection signal="timeout" from="hit_timer" to="player_move" method="turn_off_no_damage"]
+[connection signal="timeout" from="input_timer" to="." method="_on_input_timer_timeout"]
+[connection signal="body_entered" from="player_body/player_attack_area" to="player_body/player_attack_area" method="_on_player_attack_area_body_entered"]

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://script/background_object/BaseBGObject.gd" type="Script" id=1]
+[ext_resource path="res://shader/kawase_blur.tres" type="Shader" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 2 )
+shader_param/radius = 0.0
+
+[node name="BaseBGObject" type="Sprite"]
+material = SubResource( 1 )
+script = ExtResource( 1 )
+speed = 100.0
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="queue_free"]

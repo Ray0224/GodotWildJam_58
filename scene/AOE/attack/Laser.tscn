@@ -1,0 +1,295 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scene/AOE/attack/AOEBaseScene.tscn" type="PackedScene" id=1]
+[ext_resource path="res://script/AOE/Laser.gd" type="Script" id=2]
+[ext_resource path="res://SFX/skill/laser_prepare.mp3" type="AudioStream" id=3]
+[ext_resource path="res://SFX/skill/laser_shoot.mp3" type="AudioStream" id=4]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color_lerp_t")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:lerp_t")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:edge_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.941176, 0.501961, 0.501961, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:max_up_width")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 30.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:max_down_width")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 100.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Polygon2D:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/6/type = "audio"
+tracks/6/path = NodePath("AudioStreamPlayer")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 3 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "blink"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color_lerp_t")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Polygon2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "shoot"
+length = 1.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color_lerp_t")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.2, 1.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:lerp_t")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 0.307786, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:edge_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.3, 1.35 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.941176, 0.501961, 0.501961, 1 ), Color( 0.941176, 0.501961, 0.501961, 1 ), Color( 1, 0, 0, 1 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "start_hit_box"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:max_up_width")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.3, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 60.0, 60.0, 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:max_down_width")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.3, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 200.0, 200.0, 0.0 ]
+}
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 1.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Polygon2D:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/8/type = "method"
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 1.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "stop_hit_box"
+} ]
+}
+tracks/9/type = "audio"
+tracks/9/path = NodePath("AudioStreamPlayer")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+} ],
+"times": PoolRealArray( 0.3 )
+}
+
+[node name="Laser" instance=ExtResource( 1 )]
+monitorable = false
+script = ExtResource( 2 )
+cast_time = 0.6
+end_y_offset = -100.0
+min_up_width = 10.0
+max_up_width = 30.0
+min_down_width = 20.0
+max_down_width = 100.0
+end_global_y = 900.0
+lerp_t = 0.0
+center_color = Color( 1, 0, 0, 1 )
+edge_color = Color( 0.941176, 0.501961, 0.501961, 1 )
+color_lerp_t = 0.0
+max_follow_degree = 80
+
+[node name="CastTimer" parent="." index="0"]
+wait_time = 0.6
+autostart = false
+
+[node name="CollisionPolygon2D" parent="." index="1"]
+polygon = PoolVector2Array( -5, 0, 0, 0, 5, 0, 1520.35, 900, 1510.35, 900, 1500.35, 900 )
+
+[node name="Polygon2D" type="Polygon2D" parent="." index="2"]
+visible = false
+polygon = PoolVector2Array( -5, 0, 0, 0, 5, 0, 1520.35, 800, 1510.35, 800, 1500.35, 800 )
+vertex_colors = PoolColorArray( 0.941176, 0.501961, 0.501961, 1, 0.941176, 0.501961, 0.501961, 1, 0.941176, 0.501961, 0.501961, 1, 0.941176, 0.501961, 0.501961, 1, 0.941176, 0.501961, 0.501961, 1, 0.941176, 0.501961, 0.501961, 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+autoplay = "blink"
+anims/RESET = SubResource( 2 )
+anims/blink = SubResource( 3 )
+anims/shoot = SubResource( 4 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="4"]
+stream = ExtResource( 4 )
+autoplay = true

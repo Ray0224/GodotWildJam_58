@@ -1,0 +1,32 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform sampler2D noise;
+uniform float noise_speed: hint_range(0.0, 10.0, 0.1) = 1.0;
+uniform vec2 noise_direction = vec2(1.0, 0.0);
+uniform float random = 0.0;
+
+
+void fragment(){
+	vec2 normalized_direction = normalize(noise_direction);
+	vec2 offset = normalized_direction * noise_speed * TIME;
+	vec2 norm = vec2(-normalized_direction.y, normalized_direction.x);
+	
+	offset += sin(3.0 * TIME + random) * norm * 3.0;
+	float t = cos(3.0 * TIME + random);
+	offset += vec2(dot(vec2(cos(t), -sin(t)), UV - vec2(0.5)), dot(vec2(sin(t), cos(t)), UV - vec2(0.5))); 
+	vec4 noise_color = texture(noise, UV + offset);
+	
+	vec4 color = texture(TEXTURE, UV);
+	
+	if(noise_color.r <= 0.4){
+		COLOR = noise_color * color;
+	}
+	else{
+		COLOR = color;
+	}
+	
+	COLOR.a = smoothstep(0.2, 1.0, COLOR.a);
+}"

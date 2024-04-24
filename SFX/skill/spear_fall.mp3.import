@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/spear_fall.mp3-389702df9ebd423483778848aff0de1b.mp3str"
+
+[deps]
+
+source_file="res://SFX/skill/spear_fall.mp3"
+dest_files=[ "res://.import/spear_fall.mp3-389702df9ebd423483778848aff0de1b.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

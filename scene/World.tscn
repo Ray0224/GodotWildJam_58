@@ -1,0 +1,1332 @@
+[gd_scene load_steps=49 format=2]
+
+[ext_resource path="res://scene/shrine.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scene/RainGenerator.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scene/player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://sprite/cloud/cloud04.png" type="Texture" id=4]
+[ext_resource path="res://sprite/tree/tree03.png" type="Texture" id=5]
+[ext_resource path="res://sprite/cloud/cloud03.png" type="Texture" id=6]
+[ext_resource path="res://script/background.gd" type="Script" id=7]
+[ext_resource path="res://sprite/cloud/cloud01.png" type="Texture" id=8]
+[ext_resource path="res://sprite/tree/tree01.png" type="Texture" id=9]
+[ext_resource path="res://sprite/tree/tree02.png" type="Texture" id=10]
+[ext_resource path="res://sprite/tree/tree04.png" type="Texture" id=11]
+[ext_resource path="res://sprite/cloud/cloud02.png" type="Texture" id=12]
+[ext_resource path="res://sprite/cloud/cloud05.png" type="Texture" id=13]
+[ext_resource path="res://script/World.gd" type="Script" id=14]
+[ext_resource path="res://scene/enemy_boss.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scene/arrow.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scene/PullArea.tscn" type="PackedScene" id=17]
+[ext_resource path="res://script/Camera2D.gd" type="Script" id=18]
+[ext_resource path="res://sprite/M&K/mouse01.png" type="Texture" id=19]
+[ext_resource path="res://sprite/M&K/keyboard03.png" type="Texture" id=20]
+[ext_resource path="res://sprite/M&K/mouse02.png" type="Texture" id=21]
+[ext_resource path="res://sprite/M&K/keyboard01.png" type="Texture" id=22]
+[ext_resource path="res://sprite/M&K/keyboard04.png" type="Texture" id=23]
+[ext_resource path="res://sprite/M&K/keyboard02.png" type="Texture" id=24]
+[ext_resource path="res://sprite/M&K/mouse03.png" type="Texture" id=25]
+[ext_resource path="res://scene/Node2D.gd" type="Script" id=26]
+[ext_resource path="res://shader/single_color.tres" type="Shader" id=27]
+
+[sub_resource type="Animation" id=1]
+resource_name = "00"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("background:time")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 3.6, 3.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.8, 1.2, 1.2, 1.1 ]
+}
+tracks/1/type = "animation"
+tracks/1/path = NodePath("background/Tree04/shrine/AnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": PoolStringArray( "open" ),
+"times": PoolRealArray( 1.1 )
+}
+tracks/2/type = "animation"
+tracks/2/path = NodePath("enemy_boss/body/AnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": PoolStringArray( "open" ),
+"times": PoolRealArray( 1.1 )
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("background:time")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.8 ]
+}
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0.228346, 0.283465, 0.49142, 0.49298, 0.5, 0.5039, 0.503937, 0.55315, 0.629921, 0.744094, 0.814961 )
+colors = PoolColorArray( 0.192592, 0.192592, 0.192592, 1, 0.226563, 0.226563, 0.226563, 1, 0.69, 0.1173, 0.1173, 1, 0.379701, 0.379701, 0.379701, 1, 0.441341, 0.441341, 0.441341, 1, 0.488156, 0.488156, 0.488156, 1, 0.8125, 0.533203, 0.533203, 1, 0.53125, 0.53125, 0.53125, 1, 0.357159, 0.357159, 0.357159, 1, 0.215592, 0.215592, 0.215592, 1, 0.17, 0.17, 0.17, 1 )
+
+[sub_resource type="GradientTexture2D" id=4]
+gradient = SubResource( 3 )
+width = 1920
+height = 1080
+fill_from = Vector2( 0.5, 0 )
+fill_to = Vector2( 0.5, 1 )
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("L_ShrineCover:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 130, -442 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("L_ShrineCover:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("L_ShrineDoor:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 130, -441 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("L_ShrineDoor:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ShrineSide:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, -356 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("ShrineSide:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.06, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("R_ShrineDoorR:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("R_ShrineCoverR:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("ShrineSide2:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, -356 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("ShrineSide2:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.06, 1 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("L_ShrineDoor:z_index")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("L_ShrineCover:z_index")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("R_ShrineDoorR:z_index")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("R_ShrineCoverR:z_index")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "open"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("L_ShrineCover:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 130, -442 ), Vector2( 130, -442 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("L_ShrineCover:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 2.4, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1e-05, 1 ), Vector2( 1e-05, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("L_ShrineDoor:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 2.3, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 130, -441 ), Vector2( 130, -441 ), Vector2( 130, -441 ), Vector2( 130, -441 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("L_ShrineDoor:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 2.3, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( -0.9, 1 ), Vector2( -0.9, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ShrineSide:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 2.3, 2.4, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, -356 ), Vector2( 108, -356 ), Vector2( 247, -356 ), Vector2( 247, -356 ), Vector2( 108, -356 ), Vector2( 0.5, -356 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("ShrineSide:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 2.3, 2.4, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.06, 1 ), Vector2( 1, 1 ), Vector2( 0.4, 1 ), Vector2( 0.4, 1 ), Vector2( 1, 1 ), Vector2( 0.06, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("R_ShrineDoorR:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 2.3, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( -0.9, 1 ), Vector2( -0.9, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("R_ShrineCoverR:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.05, 2.4, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1e-05, 1 ), Vector2( 1e-05, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("ShrineSide2:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 2.3, 2.4, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, -356 ), Vector2( -108, -355 ), Vector2( -240, -355 ), Vector2( -240, -355 ), Vector2( -108, -355 ), Vector2( 0.5, -356 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("ShrineSide2:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 2.3, 2.4, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.06, 1 ), Vector2( 1, 1 ), Vector2( 0.4, 1 ), Vector2( 0.4, 1 ), Vector2( 1, 1 ), Vector2( 0.06, 1 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("L_ShrineDoor:z_index")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 2.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 0 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("L_ShrineCover:z_index")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 2.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 0 ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("R_ShrineDoorR:z_index")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 2.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 0 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("R_ShrineCoverR:z_index")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 2.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 0 ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Tree01:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -512, -69 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Tree01:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Tree01:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.84, 0.84, 0.84, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "T1"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Tree01:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 5, 1 ),
+"update": 0,
+"values": [ Vector2( -113, 56 ), Vector2( -1166, 661 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Tree01:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 5, 1 ),
+"update": 0,
+"values": [ Vector2( 0.143444, 0.143444 ), Vector2( 1.37958, 1.37958 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Tree01:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.8, 1 ),
+"update": 0,
+"values": [ Color( 0.84, 0.84, 0.84, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Tree02:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -642, 353 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Tree02:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Tree02:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.84, 0.84, 0.84, 1 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "T2"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Tree02:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 5, 1 ),
+"update": 0,
+"values": [ Vector2( -126, 55 ), Vector2( -1186, 655 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Tree02:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 5, 1 ),
+"update": 0,
+"values": [ Vector2( 0.145951, 0.145951 ), Vector2( 1.44036, 1.44036 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Tree02:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.8, 1 ),
+"update": 0,
+"values": [ Color( 0.84, 0.84, 0.84, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Tree03:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -638, 355 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Tree03:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Tree03:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "T3"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Tree03:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 5, 1 ),
+"update": 0,
+"values": [ Vector2( -116, 58 ), Vector2( -1191, 675 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Tree03:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 5, 1 ),
+"update": 0,
+"values": [ Vector2( 0.15451, 0.15451 ), Vector2( 1.69521, 1.69521 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Tree03:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.8, 1 ),
+"update": 0,
+"values": [ Color( 0.839216, 0.839216, 0.839216, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Tree04:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1165, 652 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Tree04:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1.44235, 1.44235 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Tree04:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "T4"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Tree04:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 5, 1 ),
+"update": 0,
+"values": [ Vector2( -113, 56 ), Vector2( -1165, 652 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Tree04:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 5, 1 ),
+"update": 0,
+"values": [ Vector2( 0.147597, 0.147597 ), Vector2( 1.44235, 1.44235 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Tree05:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -149, -1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Tree05:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.138783, 0.138783 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Tree05:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.84, 0.84, 0.84, 1 ) ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "T5"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Tree05:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 5, 1 ),
+"update": 0,
+"values": [ Vector2( -130, 62 ), Vector2( -1420, 692 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Tree05:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 5, 1 ),
+"update": 0,
+"values": [ Vector2( 0.138783, 0.138783 ), Vector2( 1.56623, 1.56623 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Tree05:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.8, 1 ),
+"update": 0,
+"values": [ Color( 0.84, 0.84, 0.84, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=17]
+length = 0.001
+
+[sub_resource type="Animation" id=18]
+resource_name = "background"
+length = 2.0
+tracks/0/type = "animation"
+tracks/0/path = NodePath("T1")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": PoolStringArray( "T1" ),
+"times": PoolRealArray( 0.2 )
+}
+tracks/1/type = "animation"
+tracks/1/path = NodePath("T2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": PoolStringArray( "T2" ),
+"times": PoolRealArray( 0.3 )
+}
+tracks/2/type = "animation"
+tracks/2/path = NodePath("T3")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": PoolStringArray( "T3" ),
+"times": PoolRealArray( 0.4 )
+}
+tracks/3/type = "animation"
+tracks/3/path = NodePath("T4")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": PoolStringArray( "T4" ),
+"times": PoolRealArray( 0.5 )
+}
+tracks/4/type = "animation"
+tracks/4/path = NodePath("T5")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": PoolStringArray( "T5" ),
+"times": PoolRealArray( 0.1 )
+}
+
+[sub_resource type="ShaderMaterial" id=21]
+resource_local_to_scene = true
+shader = ExtResource( 27 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/enable = false
+
+[sub_resource type="Animation" id=19]
+resource_name = "00"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("keyboard/Keyboard04:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 20 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("keyboard/Keyboard02:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 20 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("mouse/Mouse02:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 20 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=20]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("keyboard/Keyboard04:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("keyboard/Keyboard02:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("mouse/Mouse02:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[node name="World" type="Node2D"]
+script = ExtResource( 14 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
+anims/00 = SubResource( 1 )
+anims/RESET = SubResource( 2 )
+
+[node name="background" type="Node2D" parent="."]
+position = Vector2( 640, 360 )
+script = ExtResource( 7 )
+anim_name = "background"
+anim_node_path = NodePath("background")
+time = 0.8
+
+[node name="Sprite" type="Sprite" parent="background"]
+texture = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Line2D" type="Line2D" parent="background"]
+visible = false
+position = Vector2( -481, -452 )
+points = PoolVector2Array( -160, 88, 1160, 843 )
+width = 2.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Line2D2" type="Line2D" parent="background"]
+visible = false
+position = Vector2( -481, -452 )
+points = PoolVector2Array( -236, 861, 274.555, 569.918, 1146, 66 )
+width = 2.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Tree04" type="Sprite" parent="background"]
+position = Vector2( -1165, 652 )
+scale = Vector2( 1.44235, 1.44235 )
+texture = ExtResource( 11 )
+offset = Vector2( -55, -417 )
+
+[node name="Cloud01" type="Sprite" parent="background/Tree04"]
+position = Vector2( 38.6823, -1411.4 )
+texture = ExtResource( 8 )
+
+[node name="Cloud03" type="Sprite" parent="background/Tree04"]
+position = Vector2( 1314.39, -1050.16 )
+texture = ExtResource( 6 )
+
+[node name="Cloud05" type="Sprite" parent="background/Tree04"]
+position = Vector2( -2187.32, -1121.05 )
+texture = ExtResource( 13 )
+
+[node name="Cloud02" type="Sprite" parent="background/Tree04"]
+position = Vector2( 3475.69, -1111.14 )
+texture = ExtResource( 8 )
+
+[node name="Cloud04" type="Sprite" parent="background/Tree04"]
+position = Vector2( -620.038, -1010 )
+texture = ExtResource( 6 )
+
+[node name="Cloud06" type="Sprite" parent="background/Tree04"]
+position = Vector2( 388.495, -735.26 )
+scale = Vector2( 0.603503, 0.603503 )
+texture = ExtResource( 13 )
+
+[node name="shrine" parent="background/Tree04" instance=ExtResource( 1 )]
+position = Vector2( 784.622, -200 )
+
+[node name="AnimationPlayer" parent="background/Tree04/shrine" index="0"]
+anims/RESET = SubResource( 5 )
+anims/open = SubResource( 6 )
+
+[node name="Tree03" type="Sprite" parent="background/Tree04"]
+position = Vector2( 1483.77, -392.963 )
+texture = ExtResource( 5 )
+
+[node name="Tree04" type="Sprite" parent="background/Tree04"]
+position = Vector2( -279.029, -333.237 )
+texture = ExtResource( 5 )
+
+[node name="Tree01" type="Sprite" parent="background/Tree04"]
+position = Vector2( 1895.49, -349.135 )
+texture = ExtResource( 9 )
+
+[node name="Tree02" type="Sprite" parent="background/Tree04"]
+position = Vector2( -418.579, -425.093 )
+texture = ExtResource( 9 )
+
+[node name="Tree05" type="Sprite" parent="background/Tree04"]
+position = Vector2( 1997.94, -425.093 )
+texture = ExtResource( 5 )
+
+[node name="Tree03" type="Sprite" parent="background"]
+position = Vector2( -638, 355 )
+texture = ExtResource( 5 )
+offset = Vector2( 3, -393 )
+
+[node name="Tree01" type="Sprite" parent="background/Tree03"]
+position = Vector2( 1888.46, -400.629 )
+texture = ExtResource( 9 )
+
+[node name="Cloud02" type="Sprite" parent="background/Tree03"]
+position = Vector2( 317.24, -1481.79 )
+texture = ExtResource( 12 )
+
+[node name="Cloud01" type="Sprite" parent="background/Tree03"]
+position = Vector2( 1857.15, -1436.5 )
+texture = ExtResource( 8 )
+
+[node name="Cloud05" type="Sprite" parent="background/Tree03"]
+position = Vector2( -1798.52, -1442.97 )
+texture = ExtResource( 13 )
+
+[node name="Tree04" type="Sprite" parent="background/Tree03"]
+position = Vector2( -282.784, -394.116 )
+texture = ExtResource( 11 )
+
+[node name="Tree03" type="Sprite" parent="background/Tree03"]
+position = Vector2( -510.719, -384.999 )
+texture = ExtResource( 5 )
+
+[node name="Tree02" type="Sprite" parent="background/Tree03"]
+position = Vector2( 1499.01, -409.746 )
+texture = ExtResource( 10 )
+
+[node name="Tree05" type="Sprite" parent="background/Tree03"]
+position = Vector2( 1859.8, -424.073 )
+rotation = 3.14159
+scale = Vector2( 1.005, -1 )
+texture = ExtResource( 5 )
+
+[node name="Tree02" type="Sprite" parent="background"]
+modulate = Color( 0.84, 0.84, 0.84, 1 )
+position = Vector2( -642, 353 )
+texture = ExtResource( 10 )
+offset = Vector2( -126, -417 )
+
+[node name="Tree04" type="Sprite" parent="background/Tree02"]
+position = Vector2( 1922.58, -396.018 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 11 )
+offset = Vector2( -13.0593, 3.45303 )
+
+[node name="Cloud03" type="Sprite" parent="background/Tree02"]
+position = Vector2( 788.218, -1411.23 )
+scale = Vector2( 2.1139, 1.18431 )
+texture = ExtResource( 6 )
+
+[node name="Cloud04" type="Sprite" parent="background/Tree02"]
+position = Vector2( -1664.94, -1589.57 )
+scale = Vector2( 2.1139, 1.18431 )
+texture = ExtResource( 4 )
+
+[node name="Cloud05" type="Sprite" parent="background/Tree02"]
+position = Vector2( 3247.66, -1473.1 )
+scale = Vector2( 2.1139, 1.18431 )
+texture = ExtResource( 13 )
+
+[node name="Tree02" type="Sprite" parent="background/Tree02"]
+position = Vector2( 1914.36, -483.109 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 10 )
+
+[node name="Tree03" type="Sprite" parent="background/Tree02"]
+position = Vector2( -276.181, -433.758 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+texture = ExtResource( 5 )
+
+[node name="Tree05" type="Sprite" parent="background/Tree02"]
+position = Vector2( -479.713, -410.932 )
+texture = ExtResource( 11 )
+
+[node name="Tree06" type="Sprite" parent="background/Tree02"]
+position = Vector2( 2034.95, -386.203 )
+texture = ExtResource( 5 )
+
+[node name="Tree01" type="Sprite" parent="background"]
+modulate = Color( 0.84, 0.84, 0.84, 1 )
+position = Vector2( -512, -69 )
+texture = ExtResource( 9 )
+offset = Vector2( 119, -423 )
+
+[node name="Tree05" type="Sprite" parent="background/Tree01"]
+position = Vector2( 170.685, -102.131 )
+rotation = 3.14159
+scale = Vector2( 0.923319, -0.923319 )
+texture = ExtResource( 10 )
+offset = Vector2( -1791.57, -344.359 )
+
+[node name="Cloud01" type="Sprite" parent="background/Tree01"]
+position = Vector2( -30.4088, -206.641 )
+scale = Vector2( 2.09141, 2.09141 )
+texture = ExtResource( 8 )
+offset = Vector2( 406.667, -766.667 )
+
+[node name="Cloud04" type="Sprite" parent="background/Tree01"]
+position = Vector2( -6.97131, -6.97119 )
+scale = Vector2( 1.72274, 1.72274 )
+texture = ExtResource( 4 )
+offset = Vector2( -1056.18, -890.267 )
+
+[node name="Cloud02" type="Sprite" parent="background/Tree01"]
+position = Vector2( -6.97119, -6.97144 )
+scale = Vector2( 2.47871, 2.47871 )
+texture = ExtResource( 12 )
+offset = Vector2( 1358.44, -604.688 )
+
+[node name="Tree03" type="Sprite" parent="background/Tree01"]
+position = Vector2( -249.318, -339.572 )
+texture = ExtResource( 5 )
+
+[node name="Tree04" type="Sprite" parent="background/Tree01"]
+position = Vector2( -490.848, -444.728 )
+texture = ExtResource( 11 )
+
+[node name="Tree06" type="Sprite" parent="background/Tree01"]
+position = Vector2( 1829.97, -365.155 )
+texture = ExtResource( 11 )
+
+[node name="Tree07" type="Sprite" parent="background/Tree01"]
+position = Vector2( 2018.1, -421.725 )
+texture = ExtResource( 5 )
+
+[node name="Tree05" type="Sprite" parent="background"]
+modulate = Color( 0.84, 0.84, 0.84, 1 )
+position = Vector2( -149, -1 )
+scale = Vector2( 0.138783, 0.138783 )
+texture = ExtResource( 10 )
+offset = Vector2( -118.994, -430.927 )
+
+[node name="Tree04" type="Sprite" parent="background/Tree05"]
+position = Vector2( 1726.49, -414.276 )
+texture = ExtResource( 11 )
+
+[node name="Tree01" type="Sprite" parent="background/Tree05"]
+position = Vector2( -246.082, -366.744 )
+texture = ExtResource( 9 )
+
+[node name="Tree02" type="Sprite" parent="background/Tree05"]
+position = Vector2( 2138.43, -298.088 )
+texture = ExtResource( 9 )
+
+[node name="Tree03" type="Sprite" parent="background/Tree05"]
+position = Vector2( -568.242, -284.884 )
+texture = ExtResource( 10 )
+
+[node name="Tree05" type="Sprite" parent="background/Tree05"]
+position = Vector2( 2281.02, -364.104 )
+rotation = 3.14159
+scale = Vector2( 0.892001, -1 )
+texture = ExtResource( 10 )
+
+[node name="T1" type="AnimationPlayer" parent="background"]
+anims/RESET = SubResource( 7 )
+anims/T1 = SubResource( 8 )
+
+[node name="T2" type="AnimationPlayer" parent="background"]
+anims/RESET = SubResource( 9 )
+anims/T2 = SubResource( 10 )
+
+[node name="T3" type="AnimationPlayer" parent="background"]
+anims/RESET = SubResource( 11 )
+anims/T3 = SubResource( 12 )
+
+[node name="T4" type="AnimationPlayer" parent="background"]
+anims/RESET = SubResource( 13 )
+anims/T4 = SubResource( 14 )
+
+[node name="T5" type="AnimationPlayer" parent="background"]
+anims/RESET = SubResource( 15 )
+anims/T5 = SubResource( 16 )
+
+[node name="background" type="AnimationPlayer" parent="background"]
+autoplay = "background"
+anims/RESET = SubResource( 17 )
+anims/background = SubResource( 18 )
+
+[node name="enemy_boss" parent="." instance=ExtResource( 15 )]
+
+[node name="move" parent="enemy_boss" index="1"]
+speed = 0.0
+open_speed = 16.3636
+
+[node name="body" parent="enemy_boss" index="3"]
+material = SubResource( 21 )
+
+[node name="player" parent="." instance=ExtResource( 3 )]
+
+[node name="RainGenerator" parent="." instance=ExtResource( 2 )]
+
+[node name="arrow" parent="." instance=ExtResource( 16 )]
+position = Vector2( 694, 337 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="PullArea" parent="." instance=ExtResource( 17 )]
+position = Vector2( 688, 323 )
+rotation = 0.261799
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 650, 360 )
+z_as_relative = false
+current = true
+smoothing_enabled = true
+drag_margin_left = 1.0
+drag_margin_top = 1.0
+drag_margin_right = 1.0
+drag_margin_bottom = 1.0
+script = ExtResource( 18 )
+shake_power = 10.0
+delta_time = 0.01
+
+[node name="Timer" type="Timer" parent="Camera2D"]
+one_shot = true
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 658, 203 )
+scale = Vector2( 0.3, 0.3 )
+script = ExtResource( 26 )
+
+[node name="keyboard" type="Node2D" parent="Node2D"]
+position = Vector2( -730, -48 )
+
+[node name="Keyboard01" type="Sprite" parent="Node2D/keyboard"]
+texture = ExtResource( 22 )
+
+[node name="Keyboard02" type="Sprite" parent="Node2D/keyboard"]
+texture = ExtResource( 24 )
+
+[node name="Keyboard03" type="Sprite" parent="Node2D/keyboard"]
+texture = ExtResource( 20 )
+
+[node name="Keyboard04" type="Sprite" parent="Node2D/keyboard"]
+texture = ExtResource( 23 )
+
+[node name="mouse" type="Node2D" parent="Node2D"]
+position = Vector2( 547, 31 )
+
+[node name="Mouse01" type="Sprite" parent="Node2D/mouse"]
+texture = ExtResource( 19 )
+
+[node name="Mouse02" type="Sprite" parent="Node2D/mouse"]
+texture = ExtResource( 21 )
+
+[node name="Mouse04" type="Sprite" parent="Node2D/mouse"]
+modulate = Color( 0.2, 0.2, 0.2, 1 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 21 )
+
+[node name="Mouse03" type="Sprite" parent="Node2D/mouse"]
+texture = ExtResource( 25 )
+
+[node name="M&K" type="AnimationPlayer" parent="Node2D"]
+autoplay = "00"
+anims/00 = SubResource( 19 )
+anims/RESET = SubResource( 20 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="boss_died" from="enemy_boss" to="." method="game_over"]
+[connection signal="boss_hp_zero" from="enemy_boss" to="." method="game_win"]
+[connection signal="finished" from="enemy_boss" to="." method="start_game"]
+[connection signal="player_died" from="player" to="." method="game_over"]
+[connection signal="reborned" from="player" to="." method="open_ani"]
+[connection signal="pull_finished" from="PullArea" to="player" method="play_spear_out"]
+[connection signal="pull_finished" from="PullArea" to="arrow" method="queue_free"]
+[connection signal="pulled" from="PullArea" to="player" method="play_spear_pull"]
+[connection signal="timeout" from="Camera2D/Timer" to="Camera2D" method="camara_shake"]
+
+[editable path="background/Tree04/shrine"]
+[editable path="enemy_boss"]

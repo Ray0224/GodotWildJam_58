@@ -1,0 +1,3284 @@
+[gd_scene load_steps=30 format=2]
+
+[ext_resource path="res://script/enemy.gd" type="Script" id=1]
+[ext_resource path="res://script/enemy_size.gd" type="Script" id=2]
+[ext_resource path="res://script/skeleton_move.gd" type="Script" id=3]
+[ext_resource path="res://sprite/skeleton/seleton_hand.png" type="Texture" id=4]
+[ext_resource path="res://sprite/skeleton/seleton_leg.png" type="Texture" id=5]
+[ext_resource path="res://sprite/skeleton/seleton_jaw.png" type="Texture" id=6]
+[ext_resource path="res://sprite/skeleton/seleton_skull.png" type="Texture" id=7]
+[ext_resource path="res://sprite/skeleton/seleton_body.png" type="Texture" id=8]
+[ext_resource path="res://sprite/skeleton/seleton_butt.png" type="Texture" id=9]
+[ext_resource path="res://script/enemy_body.gd" type="Script" id=10]
+[ext_resource path="res://script/enemy_attack_area2D.gd" type="Script" id=11]
+[ext_resource path="res://sprite/circle.png" type="Texture" id=12]
+[ext_resource path="res://SFX/boss/enemy_hurt.wav" type="AudioStream" id=13]
+[ext_resource path="res://shader/single_color.tres" type="Shader" id=14]
+
+[sub_resource type="ShaderMaterial" id=15]
+resource_local_to_scene = true
+shader = ExtResource( 14 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/enable = false
+
+[sub_resource type="Gradient" id=10]
+offsets = PoolRealArray( 0, 0.493119, 0.692661 )
+colors = PoolColorArray( 0.772549, 0.0862745, 0.0862745, 0.694118, 0.8125, 0.0571289, 0.0571289, 1, 0.917647, 0.0509804, 0.0509804, 0 )
+
+[sub_resource type="GradientTexture2D" id=11]
+gradient = SubResource( 10 )
+width = 512
+height = 512
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("SeletonBody:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 26, -417 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SeletonBody:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SeletonBody:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SeletonButt:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -5, -310 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SeletonButt:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SeletonButt:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SeletonSkull:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 49, -573 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SeletonSkull:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("SeletonSkull:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("SeletonSkull/SeletonJaw:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 22, 118 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("SeletonSkull/SeletonJaw:rotation_degrees")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("SeletonSkull/SeletonJaw:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("L_SeletonLeg:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, -286 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("L_SeletonLeg:rotation_degrees")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("L_SeletonLeg:scale")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("R_SeletonHand:position")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -111, -444 ) ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("R_SeletonHand:rotation_degrees")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("R_SeletonHand:scale")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("R_SeletonLeg:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -88, -279 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("R_SeletonLeg:rotation_degrees")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("R_SeletonLeg:scale")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("L_SeletonHand:position")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 147, -442 ) ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("L_SeletonHand:rotation_degrees")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("L_SeletonHand:scale")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ) ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("R_SeletonLeg:polygon")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 66, 155, 51, 304, -2.99506, 273.525, 25, 147 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("L_SeletonLeg:polygon")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 81.8564, 130.198, 82.8465, 304.455, 18.4901, 300, 35.3218, 131.683 ) ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("R_SeletonHand:polygon")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -8, 141, -24, 275, 34, 277, 30, 138 ) ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("L_SeletonHand:polygon")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -15, 105, 53, 237, 98, 202, 25, 111 ) ]
+}
+tracks/28/type = "value"
+tracks/28/path = NodePath("CollisionShape2D:scale")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/29/type = "value"
+tracks/29/path = NodePath("attack_area2D:monitoring")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/30/type = "value"
+tracks/30/path = NodePath("VFX_attack:texture:gradient:offsets")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ PoolRealArray( 0, 0.493119, 0.692661 ) ]
+}
+tracks/31/type = "value"
+tracks/31/path = NodePath("VFX_attack:visible")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/32/type = "value"
+tracks/32/path = NodePath("OnHitParticle:emitting")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/33/type = "value"
+tracks/33/path = NodePath(".:material:shader_param/enable")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "attack"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("SeletonBody:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 26, -417 ), Vector2( 42, -362 ), Vector2( 26, -417 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SeletonBody:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 30.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SeletonBody:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SeletonButt:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -5, -310 ), Vector2( -1, -259 ), Vector2( -5, -310 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SeletonButt:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 15.0, 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SeletonButt:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SeletonSkull:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 49, -573 ), Vector2( 126, -469 ), Vector2( 49, -573 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SeletonSkull:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 30.0, 0.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("SeletonSkull:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("SeletonSkull/SeletonJaw:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 22, 118 ), Vector2( 22, 118 ), Vector2( 25.7597, 147.768 ), Vector2( 22, 118 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("SeletonSkull/SeletonJaw:rotation_degrees")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("SeletonSkull/SeletonJaw:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("L_SeletonLeg:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -286 ), Vector2( 9, -251 ), Vector2( 1, -286 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("L_SeletonLeg:rotation_degrees")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0 ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("L_SeletonLeg:scale")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("R_SeletonHand:position")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -41, -477 ), Vector2( -12, -401 ), Vector2( -41, -477 ) ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("R_SeletonHand:rotation_degrees")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -85.2, -85.2, -85.2 ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("R_SeletonHand:scale")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ), Vector2( -1, 1 ), Vector2( -1, 1 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("R_SeletonLeg:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -88, -279 ), Vector2( -100, -260 ), Vector2( -88, -279 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("R_SeletonLeg:rotation_degrees")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0 ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("R_SeletonLeg:scale")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("L_SeletonHand:position")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 125, -505 ), Vector2( 140, -422 ), Vector2( 125, -505 ) ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("L_SeletonHand:rotation_degrees")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -61.9, -61.9 ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("L_SeletonHand:scale")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ), Vector2( -1, 1 ) ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("R_SeletonLeg:polygon")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 66, 155, 51, 304, -2.99506, 273.525, 25, 147 ), PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 11, 174, -85, 281, -153, 226, -30, 147 ), PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 66, 155, 51, 304, -2.99506, 273.525, 25, 147 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("L_SeletonLeg:polygon")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 81.8564, 130.198, 82.8465, 304.455, 18.4901, 300, 35.3218, 131.683 ), PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 164, 119, 99, 267, 6, 255, 116, 113 ), PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 81.8564, 130.198, 82.8465, 304.455, 18.4901, 300, 35.3218, 131.683 ) ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("R_SeletonHand:polygon")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, 71.0547, 181.583, 193.402, 278.159, 214.869, 213.729, 110.017, 159.766 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, 58.5694, 182.876, 222.816, 210.717, 234.401, 144.454, 103.693, 135.485 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, 33.5988, 185.462, 53.1706, 358.707, 116.794, 341.972, 69.3128, 178.426 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, 71.0547, 181.583, 193.402, 278.159, 214.869, 213.729, 110.017, 159.766 ) ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("L_SeletonHand:polygon")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, 6.16583, 100.772, -8.06982, 267.761, 47.1775, 242.846, 45.3173, 104.4 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, 47.1747, 126.081, 151.181, 234.896, 174.5, 182.731, 86.7751, 100.748 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, 67.1097, 138.993, 246.71, 114.726, 229.032, 56.5413, 107.66, 94.8948 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, 6.16583, 100.772, -8.06982, 267.761, 47.1775, 242.846, 45.3173, 104.4 ) ]
+}
+tracks/28/type = "value"
+tracks/28/path = NodePath("../move:speed")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 420.0, 0.0 ]
+}
+tracks/29/type = "value"
+tracks/29/path = NodePath("attack_area2D:monitoring")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/30/type = "value"
+tracks/30/path = NodePath("VFX_attack:texture:gradient:offsets")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ PoolRealArray( 0, 0.165138, 0.692661 ) ]
+}
+tracks/31/type = "value"
+tracks/31/path = NodePath("VFX_attack:visible")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "attack_end"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("SeletonBody:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 26, -417 ), Vector2( 56, -319 ), Vector2( 26, -417 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SeletonBody:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 44.9999, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SeletonBody:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SeletonButt:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -5, -310 ), Vector2( -3, -228 ), Vector2( -5, -310 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SeletonButt:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 15.0, 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SeletonButt:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SeletonSkull:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 49, -573 ), Vector2( 237, -353 ), Vector2( 49, -573 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SeletonSkull:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 74.9999, 0.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("SeletonSkull:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("SeletonSkull/SeletonJaw:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 22, 118 ), Vector2( 22, 118 ), Vector2( 62.7132, 161.377 ), Vector2( 22, 118 ), Vector2( 62.7132, 161.377 ), Vector2( 22, 118 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("SeletonSkull/SeletonJaw:rotation_degrees")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -30.0, 0.0, -30.0, 0.0 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("SeletonSkull/SeletonJaw:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("L_SeletonLeg:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -286 ), Vector2( 6.33334, -258.667 ), Vector2( 17, -204 ), Vector2( 1, -286 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("L_SeletonLeg:rotation_degrees")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -9.99998, -30.0, 0.0 ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("L_SeletonLeg:scale")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("R_SeletonHand:position")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -41, -477 ), Vector2( 68, -316 ), Vector2( -111, -444 ) ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("R_SeletonHand:rotation_degrees")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -85.2, -56.8, 0.0 ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("R_SeletonHand:scale")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ), Vector2( -1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("R_SeletonLeg:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -88, -279 ), Vector2( -88, -279 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("R_SeletonLeg:rotation_degrees")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("R_SeletonLeg:scale")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("L_SeletonHand:position")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 125, -505 ), Vector2( 156, -338 ), Vector2( 147, -442 ) ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("L_SeletonHand:rotation_degrees")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -61.9, -41.2667, 0.0 ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("L_SeletonHand:scale")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ), Vector2( -1, 1 ), Vector2( -1, 1 ) ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("R_SeletonLeg:polygon")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0, 0.1, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 66, 155, 51, 304, -2.99506, 273.525, 25, 147 ), PoolVector2Array( 16, 75, 24, 39, 132, 157, 51, 304, -2.99506, 273.525, 82, 179 ), PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 66, 155, 51, 304, -2.99506, 273.525, 25, 147 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("L_SeletonLeg:polygon")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 81.8564, 130.198, 82.8465, 304.455, 18.4901, 300, 35.3218, 131.683 ), PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 102.919, 129.724, 72.1152, 292.392, 7.25969, 279.443, 53.6411, 126.332 ), PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 145.045, 128.775, 50.6527, 268.267, -15.2011, 238.329, 90.2796, 115.631 ), PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 81.8564, 130.198, 82.8465, 304.455, 18.4901, 300, 35.3218, 131.683 ) ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("R_SeletonHand:polygon")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, 71.0547, 181.583, 193.402, 278.159, 214.869, 213.729, 110.017, 159.766 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -8, 141, -24, 275, 34, 277, 30, 138 ) ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("L_SeletonHand:polygon")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, 6.16583, 100.772, -8.06982, 267.761, 47.1775, 242.846, 45.3173, 104.4 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -15, 105, 53, 237, 98, 202, 25, 111 ) ]
+}
+tracks/28/type = "method"
+tracks/28/path = NodePath("../move")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "idle_mode"
+} ]
+}
+tracks/29/type = "value"
+tracks/29/path = NodePath("attack_area2D:monitoring")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "attack_pre"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("SeletonBody:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 26, -417 ), Vector2( -49, -352 ), Vector2( -11.5, -384.5 ), Vector2( -49, -352 ), Vector2( 26, -417 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SeletonBody:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -50.9, -25.45, -50.9, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SeletonBody:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SeletonButt:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -5, -310 ), Vector2( 12, -242 ), Vector2( 3.5, -276 ), Vector2( 12, -242 ), Vector2( -5, -310 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SeletonButt:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -36.4, -18.2, -36.4, 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SeletonButt:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SeletonSkull:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 49, -573 ), Vector2( -131, -506 ), Vector2( -41, -539.5 ), Vector2( -131, -506 ), Vector2( 49, -573 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SeletonSkull:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -58.2, -29.1, -58.2, 0.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("SeletonSkull:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("SeletonSkull/SeletonJaw:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 22, 118 ), Vector2( 7.5498, 141.22 ), Vector2( 22, 118 ), Vector2( 0.18988, 154.019 ), Vector2( 22, 118 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("SeletonSkull/SeletonJaw:rotation_degrees")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("SeletonSkull/SeletonJaw:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("L_SeletonLeg:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -286 ), Vector2( 1, -286 ), Vector2( 1, -286 ), Vector2( 1, -286 ), Vector2( 1, -286 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("L_SeletonLeg:rotation_degrees")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("L_SeletonLeg:scale")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("R_SeletonHand:position")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -111, -444 ), Vector2( -167, -359 ), Vector2( -139, -401.5 ), Vector2( -167, -359 ), Vector2( -41, -477 ) ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("R_SeletonHand:rotation_degrees")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0, -85.2 ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("R_SeletonHand:scale")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( -1, 1 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("R_SeletonLeg:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -88, -279 ), Vector2( -88, -279 ), Vector2( -88, -279 ), Vector2( -88, -279 ), Vector2( -88, -279 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("R_SeletonLeg:rotation_degrees")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("R_SeletonLeg:scale")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("L_SeletonHand:position")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 147, -442 ), Vector2( 18, -469 ), Vector2( 82.5, -455.5 ), Vector2( 18, -469 ), Vector2( 125, -505 ) ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("L_SeletonHand:rotation_degrees")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -71.3, -35.65, -71.3, -61.9 ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("L_SeletonHand:scale")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ), Vector2( -1, 1 ), Vector2( -1, 1 ), Vector2( -1, 1 ), Vector2( -1, 1 ) ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("R_SeletonLeg:polygon")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 66, 155, 51, 304, -2.99506, 273.525, 25, 147 ), PoolVector2Array( 31, 67, 75, 86, 80, 205, 51, 304, -2.99506, 273.525, 28, 199 ), PoolVector2Array( 24.0025, 35.9753, 66.052, 40.5248, 73, 180, 51, 304, -2.99506, 273.525, 26.5, 173 ), PoolVector2Array( 31, 67, 75, 86, 80, 205, 51, 304, -2.99506, 273.525, 28, 199 ), PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 66, 155, 51, 304, -2.99506, 273.525, 25, 147 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("L_SeletonLeg:polygon")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 81.8564, 130.198, 82.8465, 304.455, 18.4901, 300, 35.3218, 131.683 ), PoolVector2Array( 55, 66, 86, 49, 133, 172, 82.8465, 304.455, 18.4901, 300, 85, 178 ), PoolVector2Array( 36.0025, 35.4753, 71.552, 22.0248, 107.428, 151.099, 82.8465, 304.455, 18.4901, 300, 60.1609, 154.842 ), PoolVector2Array( 55, 66, 86, 49, 133, 172, 82.8465, 304.455, 18.4901, 300, 85, 178 ), PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 81.8564, 130.198, 82.8465, 304.455, 18.4901, 300, 35.3218, 131.683 ) ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("R_SeletonHand:polygon")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -8, 141, -24, 275, 34, 277, 30, 138 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -8, 141, -24, 275, 34, 277, 30, 138 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -8, 141, -24, 275, 34, 277, 30, 138 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -8, 141, -24, 275, 34, 277, 30, 138 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, 71.0547, 181.583, 193.402, 278.159, 214.869, 213.729, 110.017, 159.766 ) ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("L_SeletonHand:polygon")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -15, 105, 53, 237, 98, 202, 25, 111 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -6.53367, 103.309, 111.287, 210.809, 119.39, 168.155, 35.599, 97.5639 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -10.7668, 104.154, 82.1434, 223.904, 108.695, 185.077, 30.2995, 104.282 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -6.53367, 103.309, 111.287, 210.809, 119.39, 168.155, 35.599, 97.5639 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, 6.16583, 100.772, -8.06982, 267.761, 47.1775, 242.846, 45.3173, 104.4 ) ]
+}
+tracks/28/type = "method"
+tracks/28/path = NodePath("../move")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "move_attack"
+} ]
+}
+tracks/29/type = "value"
+tracks/29/path = NodePath("VFX_attack:texture:gradient:offsets")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ PoolRealArray( 0, 0.511468, 0.692661 ), PoolRealArray( 0, 0.165138, 0.692661 ), PoolRealArray( 0, 0.511468, 0.692661 ), PoolRealArray( 0, 0.165138, 0.692661 ) ]
+}
+tracks/30/type = "value"
+tracks/30/path = NodePath("VFX_attack:visible")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "die"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("SeletonBody:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 26, -417 ), Vector2( -86, -312 ), Vector2( -208, -85 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SeletonBody:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 15.0, 59.9999 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SeletonBody:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SeletonButt:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -5, -310 ), Vector2( -69, -149 ), Vector2( -118, -76 ), Vector2( -125, -102 ), Vector2( -128, -52 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SeletonButt:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -44.9999, -135.0, -165.0, -210.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SeletonButt:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SeletonSkull:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 49, -573 ), Vector2( -77, -544 ), Vector2( -201, -111 ), Vector2( -236, -116 ), Vector2( -201, -111 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SeletonSkull:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -59.9999, -105.0, -135.0, -105.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("SeletonSkull:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("SeletonSkull/SeletonJaw:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 22, 118 ), Vector2( 22, 118 ), Vector2( -77.0741, 164.756 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("SeletonSkull/SeletonJaw:rotation_degrees")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 44.9999 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("SeletonSkull/SeletonJaw:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("L_SeletonLeg:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -286 ), Vector2( 1, -286 ), Vector2( -185, -195 ), Vector2( -223, 17 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("L_SeletonLeg:rotation_degrees")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -44.9999, -89.9999 ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("L_SeletonLeg:scale")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("R_SeletonHand:position")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -111, -444 ), Vector2( 13, -314 ), Vector2( -39, -36 ) ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("R_SeletonHand:rotation_degrees")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -44.9999, -89.9999 ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("R_SeletonHand:scale")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("R_SeletonLeg:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -88, -279 ), Vector2( -38, -241 ), Vector2( -116, -27 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("R_SeletonLeg:rotation_degrees")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -44.9999, -89.9999 ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("R_SeletonLeg:scale")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("L_SeletonHand:position")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 147, -442 ), Vector2( 49, -442 ), Vector2( 97, -226 ) ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("L_SeletonHand:rotation_degrees")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -59.9999, -59.9999 ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("L_SeletonHand:scale")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ), Vector2( -1, 1 ), Vector2( -1, 1 ) ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("R_SeletonLeg:polygon")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 66, 155, 51, 304, -2.99506, 273.525, 25, 147 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("L_SeletonLeg:polygon")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0, 0.4, 0.45, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 81.8564, 130.198, 82.8465, 304.455, 18.4901, 300, 35.3218, 131.683 ), PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 81.8564, 130.198, 82.8465, 304.455, 18.4901, 300, 35.3218, 131.683 ), PoolVector2Array( 113.508, 56.5688, 142.396, 69.6495, 41.2726, 148.606, 82.8465, 304.455, 18.4901, 300, 5.94102, 137.219 ), PoolVector2Array( 194.455, 130.815, 193.747, 168.291, 65.054, 155.563, 91.2171, 290.621, 7.77853, 323.148, 49.4976, 127.279 ), PoolVector2Array( 127.001, 270, 96.0006, 270, 58.0004, 183, 82.8465, 304.455, 18.4901, 300, 64.0003, 117 ) ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("R_SeletonHand:polygon")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -8, 141, -24, 275, 34, 277, 30, 138 ) ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("L_SeletonHand:polygon")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -15, 105, 53, 237, 98, 202, 25, 111 ), PoolVector2Array( -19.1533, 95.1743, -1.27068, 118.201, 127.466, 93.2226, 86.6426, 235.93, 126.025, 221.717, 152.064, 56.6176 ), PoolVector2Array( 64.9395, 179.521, 76.0541, 218.27, 140.822, 102.089, 86.6426, 235.93, 126.025, 221.717, 152.064, 56.6176 ) ]
+}
+tracks/28/type = "method"
+tracks/28/path = NodePath("../move")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "enemy_off"
+} ]
+}
+tracks/29/type = "audio"
+tracks/29/path = NodePath("../AudioStreamPlayer")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 13 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/30/type = "value"
+tracks/30/path = NodePath("VFX_attack:visible")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/31/type = "value"
+tracks/31/path = NodePath("OnHitParticle:emitting")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/32/type = "value"
+tracks/32/path = NodePath(".:material:shader_param/enable")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false ]
+}
+tracks/33/type = "value"
+tracks/33/path = NodePath("../move:speed")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1000.0, 1000.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "hitted"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("SeletonBody:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 26, -417 ), Vector2( -29, -414 ), Vector2( 26, -417 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SeletonBody:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 30.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SeletonBody:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SeletonButt:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -5, -310 ), Vector2( -39, -290 ), Vector2( -5, -310 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SeletonButt:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -30.0, 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SeletonButt:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SeletonSkull:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 49, -573 ), Vector2( 105, -570 ), Vector2( 49, -573 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SeletonSkull:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 59.9999, 0.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("SeletonSkull:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("SeletonSkull/SeletonJaw:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 22, 118 ), Vector2( 68.1518, 124.043 ), Vector2( 118.404, 94.9188 ), Vector2( 22, 118 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("SeletonSkull/SeletonJaw:rotation_degrees")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -59.9999, -105.0, 0.0 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("SeletonSkull/SeletonJaw:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("L_SeletonLeg:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -286 ), Vector2( 1, -286 ), Vector2( 33, -282 ), Vector2( 1, -286 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("L_SeletonLeg:rotation_degrees")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -30.0, 0.0 ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("L_SeletonLeg:scale")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("R_SeletonHand:position")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -111, -444 ), Vector2( -111, -444 ), Vector2( -103, -378 ), Vector2( -111, -444 ) ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("R_SeletonHand:rotation_degrees")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -15.0, 0.0 ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("R_SeletonHand:scale")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("R_SeletonLeg:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -88, -279 ), Vector2( -88, -279 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("R_SeletonLeg:rotation_degrees")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("R_SeletonLeg:scale")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("L_SeletonHand:position")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 147, -442 ), Vector2( 147, -442 ), Vector2( 160, -432 ), Vector2( 147, -442 ) ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("L_SeletonHand:rotation_degrees")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("L_SeletonHand:scale")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ), Vector2( -1, 1 ), Vector2( -1, 1 ), Vector2( -1, 1 ) ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("R_SeletonLeg:polygon")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0, 0.1, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 66, 155, 51, 304, -2.99506, 273.525, 25, 147 ), PoolVector2Array( -19, 29, 16, 17, 66, 155, 51, 304, -2.99506, 273.525, 25, 147 ), PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 66, 155, 51, 304, -2.99506, 273.525, 25, 147 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("L_SeletonLeg:polygon")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 81.8564, 130.198, 82.8465, 304.455, 18.4901, 300, 35.3218, 131.683 ), PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 81.8564, 130.198, 82.8465, 304.455, 18.4901, 300, 35.3218, 131.683 ), PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 116.136, 102.847, 143.248, 225.887, 67.5809, 254.947, 77.6552, 109.497 ), PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 81.8564, 130.198, 82.8465, 304.455, 18.4901, 300, 35.3218, 131.683 ) ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("R_SeletonHand:polygon")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -8, 141, -24, 275, 34, 277, 30, 138 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -8, 141, -24, 275, 34, 277, 30, 138 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, 66.2229, 158.542, 206.971, 212.82, 267.45, 164.838, 116.387, 118.149 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -8, 141, -24, 275, 34, 277, 30, 138 ) ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("L_SeletonHand:polygon")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -15, 105, 53, 237, 98, 202, 25, 111 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -15, 105, 53, 237, 98, 202, 25, 111 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -52, 36, -184, 74, -158, 106, -32, 72 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -15, 105, 53, 237, 98, 202, 25, 111 ) ]
+}
+tracks/28/type = "method"
+tracks/28/path = NodePath("../move")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "idle_mode"
+} ]
+}
+tracks/29/type = "value"
+tracks/29/path = NodePath("../move:speed")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1000.0, 1000.0, 0.0 ]
+}
+tracks/30/type = "value"
+tracks/30/path = NodePath("attack_area2D:monitoring")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/31/type = "audio"
+tracks/31/path = NodePath("../AudioStreamPlayer")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 13 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/32/type = "value"
+tracks/32/path = NodePath("VFX_attack:visible")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/33/type = "value"
+tracks/33/path = NodePath("OnHitParticle:emitting")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/34/type = "value"
+tracks/34/path = NodePath(".:material:shader_param/enable")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("SeletonBody:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 26, -417 ), Vector2( 15, -384 ), Vector2( 26, -417 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SeletonBody:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SeletonBody:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SeletonButt:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -5, -310 ), Vector2( -4, -271 ), Vector2( -5, -310 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SeletonButt:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SeletonButt:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SeletonSkull:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 49, -573 ), Vector2( 62, -549 ), Vector2( 49, -573 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SeletonSkull:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("SeletonSkull:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("SeletonSkull/SeletonJaw:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.3, 0.4, 0.5, 0.6, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 22, 118 ), Vector2( 20.625, 142 ), Vector2( 22, 118 ), Vector2( 20.625, 142 ), Vector2( 22, 118 ), Vector2( 20.625, 142 ), Vector2( 22, 118 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("SeletonSkull/SeletonJaw:rotation_degrees")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("SeletonSkull/SeletonJaw:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("L_SeletonLeg:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -286 ), Vector2( 1, -286 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("L_SeletonLeg:rotation_degrees")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("L_SeletonLeg:scale")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("R_SeletonHand:position")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -111, -444 ), Vector2( -122, -412 ), Vector2( -111, -444 ) ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("R_SeletonHand:rotation_degrees")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0 ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("R_SeletonHand:scale")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("R_SeletonLeg:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -88, -279 ), Vector2( -88, -279 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("R_SeletonLeg:rotation_degrees")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("R_SeletonLeg:scale")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("L_SeletonHand:position")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 147, -442 ), Vector2( 155, -402 ), Vector2( 147, -442 ) ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("L_SeletonHand:rotation_degrees")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0 ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("L_SeletonHand:scale")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ), Vector2( -1, 1 ), Vector2( -1, 1 ) ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("R_SeletonLeg:polygon")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 66, 155, 51, 304, -2.99506, 273.525, 25, 147 ), PoolVector2Array( 19, 36, 59, 25, 86, 169, 51, 304, -2.99506, 273.525, 38, 180 ), PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 66, 155, 51, 304, -2.99506, 273.525, 25, 147 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("L_SeletonLeg:polygon")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 81.8564, 130.198, 82.8465, 304.455, 18.4901, 300, 35.3218, 131.683 ), PoolVector2Array( 28, 51, 62, 28, 115, 148, 82.8465, 304.455, 18.4901, 300, 68, 171 ), PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 81.8564, 130.198, 82.8465, 304.455, 18.4901, 300, 35.3218, 131.683 ) ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("R_SeletonHand:polygon")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -8, 141, -24, 275, 34, 277, 30, 138 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -24, 138, 10, 282, 62, 269, 15, 137 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -8, 141, -24, 275, 34, 277, 30, 138 ) ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("L_SeletonHand:polygon")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -15, 105, 53, 237, 98, 202, 25, 111 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -11, 129, 75, 210, 109, 163, 25, 111 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -15, 105, 53, 237, 98, 202, 25, 111 ) ]
+}
+tracks/28/type = "value"
+tracks/28/path = NodePath("attack_area2D:monitoring")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/29/type = "value"
+tracks/29/path = NodePath("VFX_attack:visible")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "walk"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("SeletonBody:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 26, -417 ), Vector2( 42, -362 ), Vector2( 26, -417 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SeletonBody:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 15.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SeletonBody:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SeletonButt:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -5, -310 ), Vector2( -1, -259 ), Vector2( -5, -310 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SeletonButt:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SeletonButt:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SeletonSkull:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 49, -573 ), Vector2( 126, -469 ), Vector2( 49, -573 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SeletonSkull:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 30.0, 0.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("SeletonSkull:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("SeletonSkull/SeletonJaw:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.3, 0.4, 0.5, 0.6, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 22, 118 ), Vector2( 22, 118 ), Vector2( 27.2967, 141.279 ), Vector2( 27.2967, 141.279 ), Vector2( 22, 118 ), Vector2( 27.2967, 141.279 ), Vector2( 22, 118 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("SeletonSkull/SeletonJaw:rotation_degrees")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("SeletonSkull/SeletonJaw:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("L_SeletonLeg:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -286 ), Vector2( 9, -251 ), Vector2( 1, -286 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("L_SeletonLeg:rotation_degrees")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0 ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("L_SeletonLeg:scale")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("R_SeletonHand:position")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -111, -444 ), Vector2( -97, -401 ), Vector2( -111, -444 ) ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("R_SeletonHand:rotation_degrees")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0 ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("R_SeletonHand:scale")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("R_SeletonLeg:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.1, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -88, -279 ), Vector2( -100, -260 ), Vector2( -88, -279 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("R_SeletonLeg:rotation_degrees")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.1, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0 ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("R_SeletonLeg:scale")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.1, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("L_SeletonHand:position")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 147, -442 ), Vector2( 147, -442 ) ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("L_SeletonHand:rotation_degrees")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("L_SeletonHand:scale")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ), Vector2( -1, 1 ) ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("R_SeletonLeg:polygon")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0, 0.1, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 66, 155, 51, 304, -2.99506, 273.525, 25, 147 ), PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 61, 160, -55, 290, -106, 231, 11, 150 ), PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 66, 155, 51, 304, -2.99506, 273.525, 25, 147 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("L_SeletonLeg:polygon")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 81.8564, 130.198, 82.8465, 304.455, 18.4901, 300, 35.3218, 131.683 ), PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 134, 112, 99, 267, 6, 255, 89, 117 ), PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 81.8564, 130.198, 82.8465, 304.455, 18.4901, 300, 35.3218, 131.683 ) ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("R_SeletonHand:polygon")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -8, 141, -24, 275, 34, 277, 30, 138 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -60, 108, 86, 230, 118, 187, -7, 105 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -8, 141, -24, 275, 34, 277, 30, 138 ) ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("L_SeletonHand:polygon")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -15, 105, 53, 237, 98, 202, 25, 111 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -9, 144, -3, 290, 66, 285, 31, 147 ), PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -15, 105, 53, 237, 98, 202, 25, 111 ) ]
+}
+tracks/28/type = "value"
+tracks/28/path = NodePath("../move:speed")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 120.0, 0.0 ]
+}
+
+[sub_resource type="CircleShape2D" id=9]
+radius = 80.0
+
+[sub_resource type="Gradient" id=12]
+offsets = PoolRealArray( 0, 0.473684, 0.573099 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture2D" id=13]
+gradient = SubResource( 12 )
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+fill_to = Vector2( 0.7, 0.3 )
+
+[sub_resource type="Curve" id=14]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.742574, 0.767045 ), -0.313712, -2.97968, 1, 1, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[node name="enemy_skeleton" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="move" type="Node2D" parent="."]
+script = ExtResource( 3 )
+speed = 1000.0
+move_attack_distance = 300.0
+
+[node name="size" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="body" type="KinematicBody2D" parent="."]
+material = SubResource( 15 )
+collision_layer = 2
+collision_mask = 3
+script = ExtResource( 10 )
+
+[node name="move_attack_timer" type="Timer" parent="body"]
+one_shot = true
+
+[node name="idle_timer" type="Timer" parent="body"]
+one_shot = true
+
+[node name="VFX_attack" type="Sprite" parent="body"]
+visible = false
+position = Vector2( 8, -433 )
+texture = SubResource( 11 )
+
+[node name="SeletonButt" type="Sprite" parent="body"]
+use_parent_material = true
+position = Vector2( -5, -310 )
+texture = ExtResource( 9 )
+
+[node name="R_SeletonLeg" type="Polygon2D" parent="body"]
+use_parent_material = true
+position = Vector2( -88, -279 )
+texture = ExtResource( 5 )
+polygon = PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 66, 155, 51, 304, -2.99506, 273.525, 25, 147 )
+uv = PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 81.8564, 130.198, 82.8465, 304.455, 18.4901, 300, 35.3218, 131.683 )
+polygons = [ PoolIntArray( 0, 1, 2, 5 ), PoolIntArray( 5, 2, 3, 4 ) ]
+
+[node name="L_SeletonLeg" type="Polygon2D" parent="body"]
+use_parent_material = true
+position = Vector2( 1, -286 )
+texture = ExtResource( 5 )
+polygon = PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 81.8564, 130.198, 82.8465, 304.455, 18.4901, 300, 35.3218, 131.683 )
+uv = PoolVector2Array( 17.0049, 4.95049, 57.104, -4.95049, 81.8564, 130.198, 82.8465, 304.455, 18.4901, 300, 35.3218, 131.683 )
+polygons = [ PoolIntArray( 0, 1, 2, 5 ), PoolIntArray( 5, 2, 3, 4 ) ]
+
+[node name="R_SeletonHand" type="Polygon2D" parent="body"]
+use_parent_material = true
+position = Vector2( -111, -444 )
+texture = ExtResource( 4 )
+polygon = PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -8, 141, -24, 275, 34, 277, 30, 138 )
+uv = PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, 9.08416, 137.624, 49.6782, 308.416, 94.2327, 271.782, 46.2129, 134.158 )
+polygons = [ PoolIntArray( 1, 0, 5, 2 ), PoolIntArray( 2, 3, 4, 5 ) ]
+
+[node name="L_SeletonHand" type="Polygon2D" parent="body"]
+use_parent_material = true
+position = Vector2( 147, -442 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 4 )
+polygon = PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, -15, 105, 53, 237, 98, 202, 25, 111 )
+uv = PoolVector2Array( 71.9555, 8.91089, 43.2426, -2.47525, 9.08416, 137.624, 49.6782, 308.416, 94.2327, 271.782, 46.2129, 134.158 )
+polygons = [ PoolIntArray( 1, 0, 5, 2 ), PoolIntArray( 2, 3, 4, 5 ) ]
+
+[node name="SeletonBody" type="Sprite" parent="body"]
+use_parent_material = true
+position = Vector2( 26, -417 )
+texture = ExtResource( 8 )
+
+[node name="SeletonSkull" type="Sprite" parent="body"]
+use_parent_material = true
+position = Vector2( 49, -573 )
+texture = ExtResource( 7 )
+
+[node name="SeletonJaw" type="Sprite" parent="body/SeletonSkull"]
+use_parent_material = true
+position = Vector2( 22, 118 )
+texture = ExtResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="body"]
+anims/RESET = SubResource( 1 )
+anims/attack = SubResource( 2 )
+anims/attack_end = SubResource( 3 )
+anims/attack_pre = SubResource( 4 )
+anims/die = SubResource( 5 )
+anims/hitted = SubResource( 6 )
+anims/idle = SubResource( 7 )
+anims/walk = SubResource( 8 )
+
+[node name="attack_area2D" type="Area2D" parent="body"]
+collision_layer = 0
+monitoring = false
+script = ExtResource( 11 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="body/attack_area2D"]
+scale = Vector2( 1, 0.5 )
+shape = SubResource( 9 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="body"]
+shape = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="body"]
+modulate = Color( 1, 1, 1, 0.4 )
+scale = Vector2( 0.4, 0.15 )
+texture = ExtResource( 12 )
+
+[node name="OnHitParticle" type="CPUParticles2D" parent="body"]
+position = Vector2( 0, -384 )
+emitting = false
+amount = 5
+lifetime = 0.3
+one_shot = true
+texture = SubResource( 13 )
+spread = 30.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 1000.0
+scale_amount = 3.0
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 14 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = -10.0
+
+[connection signal="timeout" from="body/move_attack_timer" to="move" method="move_attack_off"]
+[connection signal="timeout" from="body/idle_timer" to="move" method="patrol"]
+[connection signal="body_entered" from="body/attack_area2D" to="body/attack_area2D" method="_on_attack_area2D_body_entered"]

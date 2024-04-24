@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/short_choir.mp3-95c45910f4219dd8db6e11ec275a1e5c.mp3str"
+
+[deps]
+
+source_file="res://SFX/player/short_choir.mp3"
+dest_files=[ "res://.import/short_choir.mp3-95c45910f4219dd8db6e11ec275a1e5c.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

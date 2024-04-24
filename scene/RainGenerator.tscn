@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://script/RainGenerator.gd" type="Script" id=1]
+[ext_resource path="res://SFX/background/rain.mp3" type="AudioStream" id=2]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -320, -256, 0, 0, 0, 0, 1600, -256 )
+}
+
+[node name="RainGenerator" type="Node2D"]
+script = ExtResource( 1 )
+min_main_length = 30.0
+max_main_length = 60.0
+min_end_length = 10.0
+max_end_length = 20.0
+min_width = 4.0
+max_width = 6.0
+min_drop_speed = 2000.0
+max_drop_speed = 3000.0
+min_random_rotation_degree = -5.0
+max_random_rotation_degree = 5.0
+
+[node name="RainTargetMarker" type="Position2D" parent="."]
+position = Vector2( 640, 2000 )
+
+[node name="RainSpawnPath" type="Path2D" parent="."]
+curve = SubResource( 1 )
+
+[node name="SpawnFollow" type="PathFollow2D" parent="RainSpawnPath"]
+position = Vector2( -320, -256 )
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="SpawnTimer2" type="Timer" parent="."]
+wait_time = 0.08
+autostart = true
+
+[node name="GroundDropTimer" type="Timer" parent="."]
+wait_time = 3.3
+autostart = true
+
+[node name="GroundDropTimer2" type="Timer" parent="."]
+autostart = true
+
+[node name="RainDrops" type="Node2D" parent="."]
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -5.0
+autoplay = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="spawn_rain_drop"]
+[connection signal="timeout" from="SpawnTimer2" to="." method="spawn_rain_drop"]
+[connection signal="timeout" from="GroundDropTimer" to="." method="spawn_ground_drop"]
+[connection signal="timeout" from="GroundDropTimer2" to="." method="spawn_ground_drop"]

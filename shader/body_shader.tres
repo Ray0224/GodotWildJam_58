@@ -1,0 +1,16 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform sampler2D noise;
+uniform float threshold: hint_range(0.0, 1.0, 0.1) = 1.0;
+void fragment(){
+	float noise_value = texture(noise, UV).r;
+	vec4 color = texture(TEXTURE,UV);
+	noise_value = step(noise_value,threshold);
+	
+	color = color*vec4(1,noise_value,noise_value,1);
+
+	COLOR = color;
+	}"

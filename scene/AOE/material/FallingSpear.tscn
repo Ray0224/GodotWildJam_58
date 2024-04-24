@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://sprite/attack/spear.png" type="Texture" id=1]
+[ext_resource path="res://shader/noise/dissolve_noise.tres" type="Texture" id=2]
+[ext_resource path="res://shader/noise/dissolve_edge_noise.tres" type="Texture" id=3]
+[ext_resource path="res://shader/dissolve.tres" type="Shader" id=4]
+[ext_resource path="res://script/AOE/FallingSpear.gd" type="Script" id=5]
+[ext_resource path="res://SFX/skill/spear_fall.mp3" type="AudioStream" id=6]
+
+[sub_resource type="ShaderMaterial" id=11]
+resource_local_to_scene = true
+shader = ExtResource( 4 )
+shader_param/visible_threshold = 0.0
+shader_param/edge_width = 0.1
+shader_param/edge_color1 = Color( 1, 0, 0, 1 )
+shader_param/edge_color2 = Color( 0.380392, 0, 0, 1 )
+shader_param/dissolve_noise = ExtResource( 2 )
+shader_param/edge_light_noise = ExtResource( 3 )
+
+[sub_resource type="Animation" id=12]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/visible_threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "dissolve"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/visible_threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[node name="Spear" type="Sprite"]
+material = SubResource( 11 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 1 )
+offset = Vector2( -470, 0 )
+script = ExtResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 12 )
+anims/dissolve = SubResource( 13 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+bus = "SkillSFX"

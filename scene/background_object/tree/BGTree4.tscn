@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scene/background_object/BaseBGObject.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprite/tree/tree04.png" type="Texture" id=2]
+
+[node name="BGTree4" instance=ExtResource( 1 )]
+texture = ExtResource( 2 )
+offset = Vector2( -76, -427 )
+
+[node name="VisibilityNotifier2D" parent="." index="0"]
+rect = Rect2( -350, -900, 650, 950 )
